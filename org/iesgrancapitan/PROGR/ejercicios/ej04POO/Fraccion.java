@@ -3,7 +3,7 @@ package org.iesgrancapitan.PROGR.ejercicios.ej04POO;
 /**
  * Implementación de la clase Fracción.
  * 
- * @author rafa
+ * @author Rafael del Castillo
  */
 
 public class Fraccion implements Comparable<Fraccion> {
@@ -16,8 +16,8 @@ public class Fraccion implements Comparable<Fraccion> {
    * @param y denominador de la fracción, debe ser mayor que cero.
    */
   public Fraccion(int x, int y) {
-    this.setNum(x);
-    this.setDen(y);
+    setNum(x);
+    setDen(y);
   }
 
   /**
@@ -48,7 +48,7 @@ public class Fraccion implements Comparable<Fraccion> {
    * @throws ArithmeticException
    */
   public void setDen(int den) throws ArithmeticException {
-    if (den <= 0) {
+    if (den == 0) {
       throw new ArithmeticException();
     }
     this.den = den;
@@ -177,9 +177,7 @@ public class Fraccion implements Comparable<Fraccion> {
    * @return producto.
    */
   public static Fraccion multiplicar(Fraccion a, int b) {
-    Fraccion f = new Fraccion(a.num * b, a.den);
-    f.simplifica();
-    return f;
+    return multiplicar(a, new Fraccion(b, 1));
   }
   
   /**
@@ -189,9 +187,7 @@ public class Fraccion implements Comparable<Fraccion> {
    * @return producto.
    */
   public static Fraccion multiplicar(int a, Fraccion b) {
-    Fraccion f = new Fraccion(a * b.num, b.den);
-    f.simplifica();
-    return f;
+    return multiplicar(b, a);
   }
   
   /**
@@ -233,7 +229,7 @@ public class Fraccion implements Comparable<Fraccion> {
    * @return cociente.
    */
   public static Fraccion dividir(Fraccion a, int b) throws ArithmeticException {
-    if (b <= 0) {
+    if (b == 0) {
       throw new ArithmeticException();
     }  
     return dividir(a, new Fraccion(b, 1));
@@ -275,7 +271,7 @@ public class Fraccion implements Comparable<Fraccion> {
    * @param n segundo número.
    * @return máximo común divisor.
    */
-  public static int mcd(int m, int n) {
+  private static int mcd(int m, int n) {
     int u = Math.abs(m);
     int v = Math.abs(n);
     if (v == 0) {
@@ -294,7 +290,7 @@ public class Fraccion implements Comparable<Fraccion> {
    * Simplifica la fracción.
    */
   public void simplifica() {
-    int d = mcd(this.num,this.den);
+    int d = mcd(this.num, this.den);
     this.num /= d;
     this.den /= d;
   }
@@ -307,8 +303,7 @@ public class Fraccion implements Comparable<Fraccion> {
   }
   
   public String toString() {
-    String texto = num + "/" + den;
-    return texto;
+    return this.num + "/" + this.den;
   }
   
   public boolean equals(Fraccion a) {
@@ -316,7 +311,7 @@ public class Fraccion implements Comparable<Fraccion> {
   }
   
   public boolean equals(int a) {
-    return this.equals(new Fraccion(a, 1));   
+    return equals(new Fraccion(a, 1));   
   }
 
   @Override
