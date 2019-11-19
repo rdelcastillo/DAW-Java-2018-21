@@ -20,7 +20,7 @@ public class Ej14ContieneSubCadena {
   // es igual a la segunda, la primera cadena contiene la segunda.
   // Datos de entrada: Cadena de caracteres y subcadena a buscar.
   // Información de salida: Mensaje indicando si la cadea contiene la subcadena o no.
-  // Variables:cadena, subcadena  (carácter), numSubcadenas,nsubc (entero),
+  // Variables:cadena, subcadena  (carácter), comprobarHasta, i (entero),
   // estaSubcadena (lógico)
   // ################################################################################
 
@@ -29,28 +29,28 @@ public class Ej14ContieneSubCadena {
     String cadena;
     String subcadena;
     boolean estaSubcadena = false;
-    int numSubcadenas;
+    int comprobarHasta;
 
     // Pedimos datos
     System.out.print("Introduce una cadena: ");
     cadena = s.nextLine();
-    System.out.print("Introduce una subcadena a buscar en la cadena anterior: ");
+    System.out.print("Introduce una subcadena de la cadena anterior: ");
     subcadena = s.nextLine();
 
     // Proceso
-    numSubcadenas = cadena.length()-subcadena.length()+1;
-    for (int nsubc=0; nsubc<=numSubcadenas-1 && !estaSubcadena; nsubc++) {
-      if (cadena.substring(nsubc,nsubc+subcadena.length()).equals(subcadena)) {
+    comprobarHasta = cadena.length()-subcadena.length();
+    for (int i=0; i<=comprobarHasta && !estaSubcadena; i++) {
+      String subc = cadena.substring(i,i+subcadena.length()); // subcadena de cadena a comprobar
+      if (subc.equals(subcadena)) {
         estaSubcadena = true;
       }
     }
     if (estaSubcadena) {
-      System.out.println("La cadena contiene la subcadena.");
+      System.out.println("¡Muy bien!");
     } else {
-      System.out.println("La cadena no contiene la subcadena.");
+      System.out.println("La cadena '" + subcadena + "' no es subcadena de '" + cadena +"'");
     }
   }
-
 
 }
 

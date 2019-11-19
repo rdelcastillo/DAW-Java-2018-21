@@ -3,7 +3,16 @@
 *
 * @author Luis J. Sánchez
 *
-* Modificado por la clase 1ºDaw usando la clase Scanner
+* Modificado por la clase 1ºDaw usando la clase Scanner.
+*
+* En este ejemplo leemos un entero, después una cadena y luego otro entero.
+* Después de leer el primer entero se nos queda un salto de línea (\n) en
+* el buffer de teclado. Si no lo sacamos de ahí no podremos leer la cadena
+* después de leer el entero, queda el salto de línea suelto y al leer
+* el sistema entiende que estoy introduciendo una cadena vacía y se "salta"
+* la istrucción.
+*
+* Sacamos el salto de línea del buffer de teclado llamando a s.nextLine().
 */
 
 import java.util.Scanner;
@@ -14,7 +23,7 @@ public class LeeNumerosv2 {
     Scanner s = new Scanner(System.in);
 
     System.out.println("Por favor, introduce 1er número:");
-    int primerNumero = s.nextInt();
+    int primerNumero = s.nextInt(); s.nextLine();  //saco el salto del línea del buffer
     System.out.println("Por favor, introduce una cadena:");
     String cadena = s.nextLine();
     System.out.println("Por favor, introduce 2º  número:");

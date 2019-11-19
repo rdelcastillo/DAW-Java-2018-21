@@ -8,7 +8,7 @@ Retocado por Rafael del Castillo con el comando sed. */
 
 import java.util.concurrent.TimeUnit;
 
-public class Ej08Cronometro {
+public class Ej08CronometroV2 {
 
   // ################################################################################
   // Hacer un programa que muestre un cronometro, indicando las horas, minutos y segundos.
@@ -23,29 +23,24 @@ public class Ej08Cronometro {
   // ################################################################################
 
   public static void main(String args[]) throws InterruptedException {
-    int hora=0;
-    int minuto=0;
-    int segundo=0;
-    String borraAnterior="\b\b\b\b\b\b\b\b";  // ver https://docs.oracle.com/javase/tutorial/java/data/characters.html
+    int hora;
+    int minuto;
+    int segundo;
+    String borraAnterior = "\b\b\b\b\b\b\b\b";  // ver https://docs.oracle.com/javase/tutorial/java/data/characters.html
 
-    while (true) {
-      // escribe hora:minutos:segundos (actualizandose a medida que va pasando cada segundo)
-      System.out.printf("%02d:%02d:%02d",hora,minuto,segundo);
-      TimeUnit.SECONDS.sleep(1);
-      // pasar al siguiente segundo
-      if (segundo < 59) {
-        segundo++;
-      } else {
-        segundo=0;
-        if (minuto < 59) {
-          minuto++;
-        } else {
-          minuto = 0;
-          hora++;
+    // horas
+    for (hora=0; hora<=23; hora++) {
+      // minutos
+      for (minuto=0; minuto<=59; minuto++) {
+        // segundos
+        for (segundo=0; segundo<=59; segundo++) {
+          // escribe hora:minutos:segundos (actualizandose a medida que va pasando cada segundo)
+          System.out.printf("%02d:%02d:%02d",hora,minuto,segundo);
+          TimeUnit.SECONDS.sleep(1);
+          //Thread.sleep(1*1000);
+          System.out.print(borraAnterior);
         }
       }
-      // ponemos el cursor al principio de la línea
-      System.out.print(borraAnterior);
     }
   }
 

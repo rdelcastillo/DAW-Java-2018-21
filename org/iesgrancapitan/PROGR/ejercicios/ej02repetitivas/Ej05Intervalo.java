@@ -52,15 +52,15 @@ public class Ej05Intervalo {
   // ################################################################################
 
   public static void main(String args[]) {
-    Scanner s = new Scanner(System.in);
-    int contFueraIntervalo = 0;
-    boolean igualLimites = false;
-    int limInf;
-    int limSup;
-    int num;
-    int sumaDentroIntervalo = 0;
+    Scanner s = new Scanner(System.in); // leer entradas del usuario
+    int contFueraIntervalo = 0;         // contador números fuera del intervalo
+    boolean igualLimites = false;       // si se ha introducido un límite
+    int limInf;                         // límite inferior del intervalo
+    int limSup;                         // límite superior del intervalo
+    int num;                            // número introducido por el/la usuario/a
+    int sumaDentroIntervalo = 0;        // sumatorio números dentro del intervalo
 
-    // Me aseguro que el limInf es menor que el limSup
+    // Pido los límites y me aseguro que el limInf es menor que el limSup
     do {
       System.out.print("Introduce el límite inferior del intervalo: ");
       limInf = s.nextInt();
@@ -75,22 +75,21 @@ public class Ej05Intervalo {
     System.out.print("Introduce un número (0, para salir): ");
     num = s.nextInt();
     while (num!=0) {
-      // Pertenece al intervalo
-      if (num>limInf && num<limSup) {
+      if (num>limInf && num<limSup) { // Pertenece al intervalo
         sumaDentroIntervalo += num;
-      } else {
-        // No pertenece al intervalo
+      } else { // No pertenece al intervalo
         contFueraIntervalo++;
-      }
-      // Número igual a alguno de los límites
-      if (num==limInf || num==limSup) {
-        igualLimites = true;
+        // Número igual a alguno de los límites
+        if (num==limInf || num==limSup) {
+          igualLimites = true;
+        }
       }
       System.out.print("Introduce un número (0, para salir): ");
       num = s.nextInt();
     }
 
     // Resultados
+    System.out.println("\nRESULTADOS:");
     System.out.println("La suma de los número dentro del intervalo es " + sumaDentroIntervalo);
     System.out.println("La cantidad de números fuera del intervalo es " + contFueraIntervalo);
     if (igualLimites) {

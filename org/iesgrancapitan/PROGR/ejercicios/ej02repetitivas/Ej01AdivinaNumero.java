@@ -32,47 +32,53 @@ public class Ej01AdivinaNumero {
   // sino he perdido, he utilizado los 10 intentos y muestro el número generado.
   // Datos de entrada: número pedido al usuario.
   // Información de salida: Has ganado y los intentos, o has perdido y el número.
-  // Variables: num_screto, num_ingresado, intentos (entero)
+  // Variables: num_secreto, n, intentos (entero)
   // ################################################################################
   // Diseño
-  // 1.- Genero un numero aleatorio del 1 al 100 (num_secreto)
+  // 1.- Genero un numero aleatorio del 1 al 100 (numSecreto)
   // 2.- intentos = 10
   // 3.- Leer num
-  // 4.- Mientras num<> num_secreto y intentos>1
+  // 4.- Mientras num<> numSecreto y intentos>1
   // 5.- Si num_screto>num -> Escribir "Muy bajo"
   // 6.- Si num_screto<num -> Escribir "Muy alto"
   // 7.- intentos=intentos-1
   // 8.- Escribir intentos
   // 9.- Leer num
   // 10.- Si num_secreo=num -> Escribir "Has ganado", intentos
-  // 11.- SiNo -> Escribir "Has perdido, num_secreto
+  // 11.- SiNo -> Escribir "Has perdido, numSecreto
   // ################################################################################
 
+  // Constantes
+  static final int INTENTOS_MAXIMOS = 10;
+  
   public static void main(String args[]) {
     Scanner s = new Scanner(System.in);
-    int intentos = 10;
-    int num_ingresado;
-    int num_secreto = (int) (Math.random()*100 + 1);
+    int intentosQueQuedan;
+    int n;  //número ingresado
+    int numSecreto = (int) (Math.random()*100 + 1);
 
+    // Proceso
     System.out.print("Adivine el número (de 1 a 100): ");
-    num_ingresado = s.nextInt();
+    n = s.nextInt();
+    intentosQueQuedan = INTENTOS_MAXIMOS - 1;
 
-    while (num_secreto!=num_ingresado && intentos>1) {
-      if (num_secreto>num_ingresado) {
-        System.out.println("Muy bajo");
+    while (numSecreto!=n && intentosQueQuedan>0) {
+      if (n < numSecreto) {
+        System.out.println(n + " es menor que el número a adivinar");
       } else {
-        System.out.println("Muy alto");
+        System.out.println(n + " es mayor que el número a adivinar");
       }
-      intentos = intentos-1;
-      System.out.println("Le quedan "+intentos+" intentos:");
-      System.out.print("Deme otro número (de 1 a 100): ");
-      num_ingresado = s.nextInt();
+      System.out.println("Te quedan " + intentosQueQuedan + " intentos.");
+      System.out.print("Dame otro número (de 1 a 100): ");
+      n = s.nextInt();
+      intentosQueQuedan--;
     }
 
-    if (num_secreto==num_ingresado) {
-      System.out.println("Exacto! Usted adivino en "+(11-intentos)+" intentos.");
+    // Mostramos resultado
+    if (numSecreto==n) {
+      System.out.println("Exacto! Usted adivinó en "+(INTENTOS_MAXIMOS-intentosQueQuedan)+" intentos.");
     } else {
-      System.out.println("El numero era: "+num_secreto);
+      System.out.println("Has agotado el número máximo de intentos. El número a adivinar era: " + numSecreto);
     }
   }
 
