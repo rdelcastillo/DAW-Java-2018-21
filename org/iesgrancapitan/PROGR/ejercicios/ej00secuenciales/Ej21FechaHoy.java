@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 public class Ej21FechaHoy {
 
+  @SuppressWarnings("deprecation")
   public static void main(String[] args) {
     Date hoy1 = new Date();
     System.out.println("Fecha: "+hoy1);
