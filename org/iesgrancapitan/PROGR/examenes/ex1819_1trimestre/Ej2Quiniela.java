@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.examenes.ex18_1trimestre;
+package org.iesgrancapitan.PROGR.examenes.ex1819_1trimestre;
 
 /*
  * Impresión de la quiniela de la jornada de fútbol (15 partidos) después de conocer los resultados.

@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.examenes.ex18_1trimestre;
+package org.iesgrancapitan.PROGR.examenes.ex1819_1trimestre;
 
 /**
  * 

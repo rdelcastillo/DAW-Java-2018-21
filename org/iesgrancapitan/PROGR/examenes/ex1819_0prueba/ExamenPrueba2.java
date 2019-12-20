@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.examenes.ex18_0prueba;
+package org.iesgrancapitan.PROGR.examenes.ex1819_0prueba;
 
 /**
  * Programa que calcula el elemento N (se pide al usuario)
