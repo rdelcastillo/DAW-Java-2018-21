@@ -63,8 +63,8 @@ public class MaxMinMediaVar {
     double sumaNotas = 0;
     double media;
     double varianza;
-    double maximo = Double.MIN_VALUE;   // nota mínima
-    double minimo = Double.MAX_VALUE;   // nota máxima
+    double maximo = 0;  // nota mínima
+    double minimo = 10; // nota máxima
     
     notas = new double[NUMERO_NOTAS];   // creo un vector y reservo espacio
     
