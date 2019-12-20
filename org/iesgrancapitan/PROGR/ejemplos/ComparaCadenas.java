@@ -1,10 +1,5 @@
-/**
-* Lectura de datos desde teclado
-*
-* @author DAW1920
-*
-* Compara cadenas usando el método equals() y compareTo() de String.
-*/
+package org.iesgrancapitan.PROGR.ejemplos;
+
 
 import java.util.Scanner;
 

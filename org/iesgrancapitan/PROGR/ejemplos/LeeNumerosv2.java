@@ -1,3 +1,4 @@
+package org.iesgrancapitan.PROGR.ejemplos;
 /**
 * Lectura de datos desde teclado
 *

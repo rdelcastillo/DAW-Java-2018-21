@@ -1,3 +1,4 @@
+package org.iesgrancapitan.PROGR.ejemplos;
 /**
 *
 * Averiguamos si un número (7)) es primo.
