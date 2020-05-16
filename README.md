@@ -1,4 +1,4 @@
-Ejemplos de programas en Java para el módulo de Programación del CFGS Despliegue de Aplicaciones Web
+Ejemplos de programas en Java para el módulo de Programación del CFGS Desarrollo de Aplicaciones Web
 ====================================================================================================
 
 Aquí tenéis distintas relaciones de programas en Java, mejorables, y ordenados por categorías (ejercicios, exámenes, etc...). Estaría muy bien que fueseis vosotros mismos quienes propusierais mejoras.
