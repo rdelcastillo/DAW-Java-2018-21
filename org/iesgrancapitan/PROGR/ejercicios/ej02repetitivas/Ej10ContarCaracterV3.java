@@ -4,30 +4,30 @@ package org.iesgrancapitan.PROGR.ejercicios.ej02repetitivas;
 Es posible que el codigo generado no sea completamente correcto. Si encuentra
 errores por favor reportelos en el foro (http://pseint.sourceforge.net).
 
-Retocado por Rafael del Castillo con el comando sed. */
+Retocadenao por Rafael del Castillo con el comando sed. */
 
 import java.util.Scanner;
 
-public class Ej10ContarCaracter {
+public class Ej10ContarCaracterV3 {
 
   // ################################################################################
-  // Pide una cadena y un carácter por teclado (valida que sea un carácter)
-  // y muestra cuantas veces aparece el carácter en la cadena.
+  // Pide una cadenaena y un caracterácter por teclado (valida que sea un caracterácter)
+  // y muestra cuantas veces aparece el caracterácter en la cadenaena.
   // ################################################################################
   // Análisis
-  // Leo una cadena y un carácter (tengo que asegurarme que es un sólo carácter,
-  // es decir hasta que la longitud sea 1). Recorro la cadena y compara cada uno de
-  // sus caracteres con el carácter introducido, si es igual lo cuento.
-  // Datos de entrada: Cadena y carácter
-  // Información de salida: Número de veces que aparece el carácter en la cadena.
-  // Variables: cad, car (caracter), posicion, cont (entero)
+  // Leo una cadenaena y un caracterácter (tengo que asegurarme que es un sólo caracterácter,
+  // es decir hasta que la longitud sea 1). Recorro la cadenaena y compara cadenaa uno de
+  // sus caracteracteres con el caracterácter introducido, si es igual lo cuento.
+  // Datos de entrada: cadenaena y caracterácter
+  // Información de salida: Número de veces que aparece el caracterácter en la cadenaena.
+  // Variables: cadena, caracter (caracteracter), posicion, cont (entero)
   // ################################################################################
 
   public static void main(String args[]) {
     Scanner s = new Scanner(System.in);
     String cadena;
     String caracter;
-    int ocurrencias = 0;
+    int cont = 0;
 
     // Leemos datos
     System.out.print("Introduce una cadena: ");
@@ -38,12 +38,12 @@ public class Ej10ContarCaracter {
     } while (caracter.length()!=1);
 
     // Proceso
-    for (int posicion=0; posicion<cadena.length(); posicion++) {
-      if (cadena.substring(posicion,posicion+1).equals(caracter)) {
-        ocurrencias++;
+    for (char c: cadena.toCharArray()) {
+      if (c==caracter.charAt(0)) {
+        cont++;
       }
     }
-    System.out.println("En la cadena \""+cadena+"\" aparece "+ocurrencias+" veces el carácter '"+caracter+"'.");
+    System.out.println("En la cadena \""+cadena+"\" aparece "+cont+" veces el carácter '"+caracter+"'.");
   }
 
 

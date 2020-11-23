@@ -39,7 +39,7 @@ public class Ej10ContarCaracterV2 {
     } while (caracter.length()!=1);
 
     // Proceso
-    for (posicion=0; posicion<=cadena.length()-1; posicion++) {
+    for (posicion=0; posicion<cadena.length(); posicion++) {
       if (cadena.charAt(posicion)==caracter.charAt(0)) {
         cont++;
       }
