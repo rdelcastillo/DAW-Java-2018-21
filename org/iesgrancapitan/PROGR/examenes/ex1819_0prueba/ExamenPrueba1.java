@@ -13,12 +13,13 @@ import java.util.Scanner;
 public class ExamenPrueba1 {
   public static void main(String[] args) {
     Scanner s = new Scanner(System.in);
-    int n; // primer número
-    int m; // segundo número
-    double resultado;
+    long n; // primer número
+    long m; // segundo número
+    long resultado;
 
-    // Pedir los datos
     System.out.println("Cálculo del combinatorio de n sobre m\n");
+    
+    // Pedir los datos
     System.out.print("Dame valor n: ");
     n = s.nextInt();
     System.out.print("Dame valor m: ");
@@ -29,7 +30,7 @@ public class ExamenPrueba1 {
     }
 
     // Cálculos
-    resultado = (double) factorial(n) / (factorial(m) * factorial(n - m));
+    resultado = factorial(n) / (factorial(m) * factorial(n - m));
 
     // Mostrar resultados
     System.out.println("El combinatorio es " + resultado);
@@ -42,10 +43,10 @@ public class ExamenPrueba1 {
    * 
    * @return <code>long</code> con el valor del factorial
    */
-  public static long factorial(int n) {
+  public static long factorial(long num) {
     long f = 1;
 
-    for (int i = 2; i <= f; i++) {
+    for (int i = 2; i <= num; i++) {
       f *= i;
     }
     return f;
