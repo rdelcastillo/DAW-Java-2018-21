@@ -26,8 +26,8 @@ public class Ej16ConversorDecimalPalotes {
     System.out.println("--------------------------------------");
 
     // Pedimos datos
-    System.out.print("Introduzca un número entero positivo: ");
-    long num = s.nextLong();    // con s.nextInt() tendríamos un error con números grandes, con más de 10 dígitos no va
+    System.out.print("Por favor, introduzca un número entero positivo: ");
+    long num = s.nextLong();    // con s.nextInt() tendríamos un error con números grandes
     if (num <= 0) {
       System.err.println("El programa solo funciona con enteros positivos.");
     }
