@@ -47,8 +47,8 @@ public class Ej15Palindromo {
     cadena1 = cadena1.replace(" ","");
 
     // Invertimos cadena anterior
-    for (int i=cadena1.length()-1; i>=0; i--) {
-      cadena2 += cadena1.substring(i,i+1);
+    for (char c: cadena1.toCharArray()) {
+      cadena2 = c + cadena2;
     }
 
     // ¿Es palíndromo?
