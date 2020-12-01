@@ -53,11 +53,11 @@ public class Ej18InsertaDigitoV2 {
     // ¿hay error?
     if (posicion <= 0) {    
       System.err.println("La posición del dígito a insertar tiene que ser mayor que cero.");
-      System.exit(1);
+      System.exit(2);
     }
     if (posicion > numero.length()) {   
       System.err.println(posicion + " es mayor que el número de dígitos que hay.");
-      System.exit(1);
+      System.exit(3);
     }
     
     // dígito a insertar
@@ -67,13 +67,13 @@ public class Ej18InsertaDigitoV2 {
     // ¿hay error?
     if (digito < 0 || digito > 9) {
       System.err.println(digito + " no es un dígito.");
-      System.exit(1);
+      System.exit(4);
     }
     
     // ---------
     // Resultado
     // ---------
-    long resultado = Long.parseLong(numero.substring(0, posicion-1) + String.valueOf(digito) + numero.substring(posicion-1));
+    long resultado = Long.parseLong(numero.substring(0, posicion-1) + digito + numero.substring(posicion-1));
     System.out.print("El número resultante es " + resultado + ".");
 
   }

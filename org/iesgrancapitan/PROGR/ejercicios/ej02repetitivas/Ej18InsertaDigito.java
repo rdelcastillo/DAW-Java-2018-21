@@ -31,9 +31,9 @@ public class Ej18InsertaDigito {
     System.out.println("Inserción de dígitos");
     System.out.println("--------------------");
     
-    // ----------------------------------------
-    // Pedimos datos, si hay errores terminamos
-    // ----------------------------------------
+    // --------------------------------------------------------------------------------------
+    // Pedimos datos, si hay errores terminamos con códigos de error distintos para cada caso
+    // --------------------------------------------------------------------------------------
     
     // número introducido
     System.out.print("Por favor, introduzca un número entero positivo: ");  
@@ -42,7 +42,7 @@ public class Ej18InsertaDigito {
     // ¿hay error?
     if (numeroIntroducido <= 0) {   
       System.err.println(numeroIntroducido + " no es un entero positivo.");
-      System.exit(1);
+      System.exit(1); 
     }
     
     // posición
@@ -52,11 +52,11 @@ public class Ej18InsertaDigito {
     // ¿hay error?
     if (posicion <= 0) {    
       System.err.println("La posición del dígito a insertar tiene que ser mayor que cero.");
-      System.exit(1);
+      System.exit(2);
     }
     if (Math.pow(10, posicion-1) > numeroIntroducido) {   
       System.err.println(posicion + " es mayor que el número de dígitos que hay.");
-      System.exit(1);
+      System.exit(3);
     }
     
     // dígito a insertar
@@ -66,7 +66,7 @@ public class Ej18InsertaDigito {
     // ¿hay error?
     if (digito < 0 || digito > 9) {
       System.err.println(digito + " no es un dígito.");
-      System.exit(1);
+      System.exit(4);
     }
     
     // --------
@@ -82,17 +82,20 @@ public class Ej18InsertaDigito {
       longitud++;
     } while (aux > 0);
     
+    // potencia de 10 necesaria para separar los dígitos antes y después del dígito a insertar
+    long potencia10 = (long)(Math.pow(10, longitud - posicion + 1));
+    
     // parte izquierda con el dígito a insertar pegado
-    long parteIzquierda = numeroIntroducido / (long)(Math.pow(10, longitud - posicion + 1));
+    long parteIzquierda = numeroIntroducido / potencia10;
     parteIzquierda = parteIzquierda * 10 + digito;
     
     // parte derecha
-    long parteDerecha = numeroIntroducido % (long)(Math.pow(10, longitud - posicion + 1));
+    long parteDerecha = numeroIntroducido % potencia10;
 
     // ---------
     // Resultado
     // ---------
-    long resultado = parteIzquierda * (long)(Math.pow(10, longitud - posicion + 1)) + parteDerecha;
+    long resultado = parteIzquierda * potencia10 + parteDerecha;
     System.out.print("El número resultante es " + resultado + ".");
 
   }
