@@ -25,7 +25,7 @@ public class LeeNumerosv2 {
 
     System.out.println("Por favor, introduce 1er número:");
     int primerNumero = s.nextInt(); s.nextLine();  //saco el salto del línea del buffer
-    System.out.println("Por favor, introduce una cadena:");
+    System.out.println("Por favor, introduce una cadena:"); 
     String cadena = s.nextLine();
     System.out.println("Por favor, introduce 2º  número:");
     int segundoNumero = s.nextInt();

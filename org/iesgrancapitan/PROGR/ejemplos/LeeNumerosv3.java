@@ -22,7 +22,7 @@ public class LeeNumerosv3 {
     int primerNumero = s.nextInt();
     System.out.println("Por favor, introduce dos palabras separadas por espacios:");
     String palabra1 = s.next();
-    String palabra2 = s.next();
+    String palabra2 = s.next(); 
     System.out.println("Por favor, introduce 2º  número:");
     int segundoNumero = s.nextInt();
     int total = (2 * primerNumero) + segundoNumero;
