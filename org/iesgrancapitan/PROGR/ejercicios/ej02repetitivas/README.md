@@ -138,3 +138,23 @@ teclado y se supone que el usuario introducirá un dato correcto.
 ## Ejercicio 20
 
 Programa que calcule el máximo, mínimo, media y varianza de 10 notas introducidas por el usuario.
+
+## Ejercicio 21
+
+Programa que muestre tres apuestas de la quiniela en tres columnas para los 14 partidos y el pleno al quince (15 filas) de forma que la probabilidad de que salga un 1 sea  de 1/2, la probabilidad de que salga X sea de 1/3 y la probabilidad de que salga 2 sea de 1/6. 
+
+Pista: 1/2 = 3/6 y 1/3 = 2/6.
+
+## Ejercicio 22
+
+Programa que pida la temperatura media que ha hecho en cada mes de un determinado año 
+y que muestre a continuación un diagrama de barras horizontales con esos datos. 
+Las barras del diagrama se pueden dibujar a base de asteriscos o cualquier otro carácter.
+
+*Ejercicio 8 (arrays) de "Aprende Java con Ejercicios" (Ed.2019) de Luis José Sánchez González.*
+
+## Ejercicio 23
+
+Programa que genere 20 números enteros aleatorios entre 0 y 100 y que los almacene en un array. El programa debe ser capaz de pasar todos los números pares a las primeras posiciones del array (del 0 en adelante) y todos los números impares a las celdas restantes. Utiliza arrays auxiliares si es necesario.
+
+*Ejercicio 10 (arrays) de "Aprende Java con Ejercicios" (Ed.2019) de Luis José Sánchez González.*
