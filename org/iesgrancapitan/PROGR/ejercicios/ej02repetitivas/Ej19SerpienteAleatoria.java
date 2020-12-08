@@ -3,6 +3,20 @@ package org.iesgrancapitan.PROGR.ejercicios.ej02repetitivas;
 import java.util.Scanner;
 
 /**
+ * Programa que pinta por pantalla una serpiente con un “serpenteo” aleatorio. 
+ * La cabeza se representará con el carácter @ y se debe colocar exactamente en la 
+ * posición 13 (con 12 espacios delante). 
+ * 
+ * A partir de ahí, el cuerpo irá serpenteando de la siguiente manera: 
+ * 
+ * Se generará de forma aleatoria un valor entre tres posibles que hará que el siguiente 
+ * carácter se coloque una posición a la izquierda del anterior, alineado con el anterior
+ * o una posición a la derecha del anterior. 
+ * 
+ * La longitud de la serpiente se pedirá por teclado.
+ * 
+ * Ejercicio 22 (números aleatorios) de "Aprende Java con Ejercicios" (Ed.2019) 
+ * de Luis José Sánchez González.
  * 
  * @author Rafael del Castillo Gomariz
  *
