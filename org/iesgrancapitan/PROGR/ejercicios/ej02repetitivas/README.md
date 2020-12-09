@@ -151,10 +151,27 @@ Programa que pida la temperatura media que ha hecho en cada mes de un determinad
 y que muestre a continuación un diagrama de barras horizontales con esos datos. 
 Las barras del diagrama se pueden dibujar a base de asteriscos o cualquier otro carácter.
 
-*Ejercicio 8 (arrays) de "Aprende Java con Ejercicios" (Ed.2019) de Luis José Sánchez González.*
+*Ejercicio 8 (arrays unidimensionales) de "Aprende Java con Ejercicios" (Ed.2019) de Luis José Sánchez González.*
 
 ## Ejercicio 23
 
 Programa que genere 20 números enteros aleatorios entre 0 y 100 y que los almacene en un array. El programa debe ser capaz de pasar todos los números pares a las primeras posiciones del array (del 0 en adelante) y todos los números impares a las celdas restantes. Utiliza arrays auxiliares si es necesario.
 
-*Ejercicio 10 (arrays) de "Aprende Java con Ejercicios" (Ed.2019) de Luis José Sánchez González.*
+*Ejercicio 10 (arrays unidimensionales) de "Aprende Java con Ejercicios" (Ed.2019) de Luis José Sánchez González.*
+
+## Ejercicio 24
+
+Programa que genere 20 números enteros aleatorios entre 100 y 999 y los introduzca en un array de 4 filas por 5 columnas. 
+
+El programa mostrará el array con las sumas parciales de filas y columnas igual que si de una hoja de cálculo se tratara. La suma total debe aparecer en la esquina inferior derecha.
+
+*Ejercicio 3 (arrays bidimensionales) de "Aprende Java con Ejercicios" (Ed.2019) de Luis José Sánchez González.*
+
+## Ejercicio 25
+
+Realiza un programa que rellene un array de 6 filas por 10 columnas con
+números enteros positivos aleatorios comprendidos entre 0 y 1000 (ambos incluidos) de tal forma que no se repita ningún número.
+
+A continuación, el programa deberá dar la posición tanto del máximo como del mínimo.
+
+*Ejercicio 6 (arrays bidimensionales) de "Aprende Java con Ejercicios" (Ed.2019) de Luis José Sánchez González.*
