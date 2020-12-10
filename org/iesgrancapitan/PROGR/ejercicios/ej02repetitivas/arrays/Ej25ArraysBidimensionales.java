@@ -16,20 +16,20 @@ package org.iesgrancapitan.PROGR.ejercicios.ej02repetitivas.arrays;
 
 public class Ej25ArraysBidimensionales {
   
-  final static int FILAS = 6;
-  final static int COLUMNAS = 10;
+  final static int FILAS = 2;
+  final static int COLUMNAS = 3;
   final static int ALEATORIO_INICIAL = 0;
   final static int ALEATORIO_FINAL = 1000;
 
   public static void main(String[] args) {
     int[][] numeros = new int[FILAS][COLUMNAS];     // array de números
     
-    // posición máximo
-    int filaMaximo = 0;
+    // Inicialización de variables
+    
+    int filaMaximo = 0;     // posición máximo
     int columnaMaximo = 0;
 
-    // posición mínimo
-    int filaMinimo = 0;
+    int filaMinimo = 0;     // posición mínimo
     int columnaMinimo = 0;
     
     // Rellenamos array de números aleatorios

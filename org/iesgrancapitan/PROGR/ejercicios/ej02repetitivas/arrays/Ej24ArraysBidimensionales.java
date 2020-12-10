@@ -9,6 +9,8 @@ package org.iesgrancapitan.PROGR.ejercicios.ej02repetitivas.arrays;
  * 
  * La suma total debe aparecer en la esquina inferior derecha.
  * 
+ * Este programa se puede mejorar.
+ * 
  * Ejercicio 3 (arrays bidimensionales) de "Aprende Java con Ejercicios"
  * (Ed.2019) de Luis José Sánchez González.
  * 
@@ -26,10 +28,12 @@ public class Ej24ArraysBidimensionales {
     int[][] numeros = new int[FILAS][COLUMNAS]; // array de números aleatorios
 
     // Introduce valores aleatorios en el array
-    for(int fila = 0; fila < FILAS; fila++)
-      for(int columna = 0; columna < COLUMNAS; columna++)
+    for(int fila = 0; fila < FILAS; fila++) {
+      for(int columna = 0; columna < COLUMNAS; columna++) {
         numeros[fila][columna] = ALEATORIO_INICIAL + 
                             (int)(Math.random() * (ALEATORIO_FINAL - ALEATORIO_INICIAL + 1));
+      }
+    }
 
     // Muestra los datos y las sumas parciales de las filas
     for(int fila = 0; fila < FILAS; fila++) {
