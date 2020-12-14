@@ -24,16 +24,16 @@ public class Ej26ArraysBidimensionales {
   final static int COLUMNAS = 10;
   final static int ALEATORIO_INICIAL = 140;
   final static int ALEATORIO_FINAL = 210;
+  final static String[] PAIS = {"España", "Rusia", "Japón", "Australia"};
 
   public static void main(String[] args) {
-    String[] pais = {"España", "Rusia", "Japón", "Australia"};
-    int[][] estatura = new int[pais.length][COLUMNAS];   // habrá tantas filas como países
-    int[] minimo = new int[pais.length];    // mínimos de cada país 
-    int[] maximo = new int[pais.length];    // máximos de cada país
-    int[] sumatorio = new int[pais.length]; // sumas de las estaturas de cada país
+    int[][] estatura = new int[PAIS.length][COLUMNAS];   // habrá tantas filas como países
+    int[] minimo = new int[PAIS.length];    // mínimos de cada país 
+    int[] maximo = new int[PAIS.length];    // máximos de cada país
+    int[] sumatorio = new int[PAIS.length]; // sumas de las estaturas de cada país
     
     // inicializamos sumatorios, mínimos y máximos
-    for (int i = 0; i < pais.length; i++) {
+    for (int i = 0; i < PAIS.length; i++) {
       sumatorio[i] = 0;
       minimo[i] = Integer.MAX_VALUE;
       maximo[i] = Integer.MIN_VALUE;
@@ -43,11 +43,11 @@ public class Ej26ArraysBidimensionales {
     System.out.println(" ".repeat(16 + COLUMNAS*4) + "MED MÍN MÁX");
     
     // Generamos las estaturas y a la vez buscamos mínimos, máximos, hacemos sumatorios y escribimos
-    for (int fila = 0; fila < pais.length; fila++) {
+    for (int fila = 0; fila < PAIS.length; fila++) {
       
       // mostramos el país
-      System.out.printf("%12s: ", pais[fila]);
-      
+      System.out.printf("%12s: ", PAIS[fila]);
+
       // generamos tantas estaturas como columnas
       for (int columna = 0; columna < COLUMNAS; columna++) {
         
