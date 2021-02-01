@@ -1,22 +1,35 @@
 package org.iesgrancapitan.PROGR.ejercicios.ej04POO;
 
 /**
- * Implementación de la clase Fecha a partir de la solución del examen de Diciembre de 2019:
+ * Los objetos de la clase Fecha son fechas de tiempo y se crean de la forma:
  * 
- * Usamos assert para que no hay inconsistencia en el estado del objeto, para ello el programa
- * debe ejecutarse con las opciones -ea.
+ * Fecha f = Fecha(1, 10, 2020);
  * 
- * En vez de assert habría que usar excepciones.
+ * donde los parámetros que se le pasan al constructor son el día, el mes y el año respectivamente. 
+ * Si la fecha creada es incorrecta mostraremos un mensaje de error en la salida estándar de errores 
+ * (lo ideal sería lanzar una excepción, ya lo haremos cuando se vea en clase).
  * 
- * @author rafa
+ * Comportamiento:
+ * 
+ * - Saber si la fecha almacenada es correcta.
+ * - Sumar y restar días a la fecha.
+ * - Comparar la fecha almacenada con otra, el método devolverá un valor negativo si la fecha almacenada es ANTERIOR a la otra, 
+ *   0 si son IGUALES y un valor positivo si es POSTERIOR.
+ * - Saber si el año de la fecha almacenada es bisiesto.
+ * - El método toString() devuelve una cadena con el formato "<día del mes> de <nombre del mes> de <año>".
+ * 
+ * Las opciones a partir de la segunda, solo se realizarán si la fecha almacenada es correcta, en caso de no serlo, se dará un aviso, 
+ * por la salida estándar de errores, de que la operación no se puede realizar.
+ * 
+ * @author Rafael del Castillo
  *
  */
 
-public class Fecha implements Comparable<Fecha> {
+public class Fecha {
   private int dia;
   private int mes;
   private int anyo;
-  
+
   /**
    * Constructor de la clase.
    * @param dia
@@ -24,21 +37,29 @@ public class Fecha implements Comparable<Fecha> {
    * @param anyo
    */
   public Fecha(int dia, int mes, int anyo) {
-    assert esCorrecta(dia, mes, anyo): "Construcción de fecha incorrecta";
     this.dia = dia;
     this.mes = mes;
     this.anyo = anyo;
+
+    // ¿fecha correcta?
+    if (! this.esCorrecta()) {
+      System.err.println("Construcción de fecha incorrecta");
+    }
   }
 
   // Getters y Setters
-  
+
   public int getDia() {
     return dia;
   }
 
   public void setDia(int dia) {
-    assert esCorrecta(dia, this.mes, this.anyo): "Día incorrecto";
     this.dia = dia;
+
+    // ¿fecha correcta?
+    if (! this.esCorrecta()) {
+      System.err.println("Construcción de fecha incorrecta");
+    }
   }
 
   public int getMes() {
@@ -46,8 +67,12 @@ public class Fecha implements Comparable<Fecha> {
   }
 
   public void setMes(int mes) {
-    assert esCorrecta(this.dia, mes, this.anyo): "Mes incorrecto";
     this.mes = mes;
+
+    // ¿fecha correcta?
+    if (! this.esCorrecta()) {
+      System.err.println("Construcción de fecha incorrecta");
+    } 
   }
 
   public int getAnyo() {
@@ -55,21 +80,31 @@ public class Fecha implements Comparable<Fecha> {
   }
 
   public void setAnyo(int anyo) {
-    assert esCorrecta(this.dia, this.mes, anyo): "Año incorrecto";
     this.anyo = anyo;
+
+    // ¿fecha correcta?
+    if (! this.esCorrecta()) {
+      System.err.println("Construcción de fecha incorrecta");
+    }
   }
-  
-  // Métodos del objeto
-  
+
+  // Resto de métodos
+
   /**
    * @return Nombre del mes del objeto.
    */
   public String nombreMes() {
     String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-                      "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
-    return meses[this.mes-1];
+        "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    
+    
+    if (this.mes > 0 && this.mes <= 12) {    // ¿mes correcto?
+      return meses[this.mes-1];
+    } else {
+      return "MES_INCORRECTO";
+    }
   }
-  
+
   /**
    * Clona el objeto actual.
    * Ojo, en Java podemos implementar la intefaz Cloneable y que tiene el método clone().
@@ -79,114 +114,157 @@ public class Fecha implements Comparable<Fecha> {
   public Fecha clona() {
     return new Fecha(this.dia, this.mes, this.anyo);
   }
-  
+
   /**
-   * Suma un día a la fecha almacenada y la devuelve.
+   * Suma un día a la fecha almacenada.
    * 
-   * @return nueva fecha
    */
-  public Fecha mas1Dia() {
-    int dia = this.dia;
-    int mes = this.mes;
-    int anyo = this.anyo;
-   
+  private void suma1Dia() {
+    
+    if (! this.esCorrecta()) {    // solo operamos si la fecha es correcta
+      System.err.println("No se puede operar con una fecha incorrecta");
+      return;
+    }
+
     // aumentamos el día
-    dia++;
-    if (dia > diasMes(mes, anyo)) {
+    this.dia++;
+    if (this.dia > diasMes(this.mes, this.anyo)) {
       // mes siguiente
-      dia = 1;
-      mes++;
-      if (mes>12) { // nos pasamos de diciembre, año siguiente
-        mes = 1;
-        anyo++;
+      this.dia = 1;
+      this.mes++;
+      if (this.mes>12) { // nos pasamos de diciembre, año siguiente
+        this.mes = 1;
+        this.anyo++;
       }
     }
-    return new Fecha(dia, mes, anyo);
   }
-  
+
   /**
-   * Suma una serie de días a la fecha almacenada y la devuelve.
+   * Suma una serie de días a la fecha almacenada.
    * 
    * @param dias
-   * @return nueva fecha
    */
-  public Fecha masNDias(int dias) {
-    Fecha fecha2 = this.clona();
-    if (dias>=0) {
+  public void sumaDias(int dias) {
+    
+    if (! this.esCorrecta()) {      // solo operamos si la fecha es correcta
+      System.err.println("No se puede operar con una fecha incorrecta");
+      return;
+    }
+    
+    if (dias>=0) {                  // si los días son + sumo, sino resto
       for (int i=1; i<=dias; i++) {
-        fecha2 = fecha2.mas1Dia();
+        this.suma1Dia();
       }
     } else {
       for (int i=1; i<=Math.abs(dias); i++) {
-        fecha2 = fecha2.menos1Dia();
+        this.resta1Dia();
       }
     }
-    return fecha2;
   }
-  
+
   /**
-   * Resta un día a la fecha almacenada y la devuelve.
+   * Resta un día a la fecha almacenada.
    * 
-   * @return nueva fecha
    */
-  public Fecha menos1Dia() {
-    int dia = this.dia;
-    int mes = this.mes;
-    int anyo = this.anyo;
+  public void resta1Dia() {
+    
+    if (! this.esCorrecta()) {    // solo operamos si la fecha es correcta
+      System.err.println("No se puede operar con una fecha incorrecta");
+      return;
+    }
     
     // disminuimos el día
     dia--;
-    if (dia==0) { // mes anterior y último día de mes
+    if (dia == 0) { // mes anterior y último día de mes
       mes--;
       if (mes == 0) { // 31 de diciembre del año anterior
         mes = 12;
         anyo--;
-        assert anyo>=0: "Año negativo"; // no puede haber años negativos
+        if (anyo == 0) { // no puede haber año 0
+          anyo = -1;
+        }
       } 
       dia = diasMes(mes, anyo); // último día del mes anterior
     }
-    return new Fecha(dia, mes, anyo);
   }
-  
+
   /**
-   * Resta una serie de días a la fecha almacenada y la devuelve.
+   * Resta una serie de días a la fecha almacenada.
    * 
    * @param dias
-   * @return nueva fecha
    */
-  public Fecha menosNDias(int dias) {
-    Fecha fecha2 = this.clona();
+  public void restaDias(int dias) {
+    
+    if (! this.esCorrecta()) {          // solo operamos si la fecha es correcta
+      System.err.println("No se puede operar con una fecha incorrecta");
+      return;
+    }
+    
     if (dias>=0) {
-      for (int i=1; i<=dias; i++) {
-        fecha2 = fecha2.menos1Dia();
+      for (int i=1; i<=dias; i++) {     // si los días son + resto, sino sumo
+        this.resta1Dia();
       }
     } else {
       for (int i=1; i<=Math.abs(dias); i++) {
-        fecha2 = fecha2.mas1Dia();
+        this.suma1Dia();
       }
     }
-    return fecha2;
+  }
+
+  /**
+   * Comprueba si la fecha almacenada es correcta.
+   * @return true / false
+   */
+  public boolean esCorrecta() {
+    // año correcto
+    if (this.anyo == 0) {
+      return false;
+    }
+    // mes correcto
+    if (this.mes < 1 || this.mes > 12) {
+      return false;
+    }
+    // día correcto
+    return this.dia > 0 && this.dia <= diasMes(this.mes, this.anyo);
+  }
+
+  /**
+   * Compara dos fechas.
+   * 
+   * @param fecha2
+   * @return <0 si fecha1<fecha2, 0 si fecha1==fecha2, >0 si fecha1>fecha2
+   */
+  public int compara(Fecha fecha2) {
+    // solo operamos si la fecha es correcta
+    if (! this.esCorrecta()) {    
+      System.err.println("No se puede operar con una fecha incorrecta");
+      return 0;
+    }
+    
+    int f1 = this.anyo*10000 + this.mes*100 + this.dia;
+    int f2 = fecha2.anyo*10000 + fecha2.mes*100 + fecha2.dia;
+    return f1-f2;
   }
   
+  /**
+   * @param fecha2
+   * @return true si las fechas coinciden
+   */
+  public boolean esIgual(Fecha fecha2) {
+    return this.dia == fecha2.dia && this.mes == fecha2.mes && this.anyo == fecha2.anyo;
+  }
+
+  @Override
+  public String toString() {
+    return this.dia + " de " + this.nombreMes() + " de " + this.anyo;
+  }
+
   // Métodos estáticos
-  
+
   public static boolean esBisiesto(int anyo) {
     return anyo%400==0 || (anyo%4==0 && anyo%100!=0);
   }
 
-  public static boolean esCorrecta(int dia, int mes, int anyo) {
-    // año correcto
-    if (anyo < 0) {
-      return false;
-    }   
-    // mes correcto
-    if (mes<1 || mes>12) {
-      return false;
-    }
-    // día correcto
-    return dia>0 && dia<=diasMes(mes, anyo);
-  }
-      
   /**
    * @param mes
    * @param anyo
@@ -200,46 +278,4 @@ public class Fecha implements Comparable<Fecha> {
     return diasMes_[mes - 1];
   }
 
-  // Sobreescritura métodos (Override)
-  
-  @Override
-  public String toString() {
-    return this.dia + " de " + this.nombreMes() + " de " + this.anyo;
-  }
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + anyo;
-    result = prime * result + dia;
-    result = prime * result + mes;
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    Fecha other = (Fecha) obj;
-    if (anyo != other.anyo)
-      return false;
-    if (dia != other.dia)
-      return false;
-    if (mes != other.mes)
-      return false;
-    return true;
-  }
-
-  @Override
-  public int compareTo(Fecha fecha2) {
-    int f1 = this.anyo*10000 + this.mes*100 + this.dia;
-    int f2 = fecha2.anyo*10000 + fecha2.mes*100 + fecha2.dia;
-    return f1-f2;
-  }
-  
 }
