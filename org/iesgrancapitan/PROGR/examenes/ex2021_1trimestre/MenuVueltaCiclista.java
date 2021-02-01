@@ -49,13 +49,13 @@ public class MenuVueltaCiclista {
 
   public static void main(String[] args) {
     String [] nombresCiclistas = new String[NUM_CICLISTAS];
-    int[] ciclistas = new int[NUM_CICLISTAS];
+    int[] dorsalesCiclistas = new int[NUM_CICLISTAS];
     int[][] etapas = new int[NUM_CICLISTAS][NUM_ETAPAS];
     int opcion;
     boolean continuar = true;
     boolean datosGenerados = false;
     
-    // Inicializamos el array de estudiantes
+    // Inicializamos el array de ciclistas
     for (int i = 0; i < nombresCiclistas.length; i++) {
       nombresCiclistas[i] = "Ciclista nº " + (i+1);
     }
@@ -65,23 +65,23 @@ public class MenuVueltaCiclista {
       opcion = menu();
       switch (opcion) {
         case 1: // generamos los tiempos y dorsales
-          generaDatos(etapas, ciclistas);
+          generaDatos(etapas, dorsalesCiclistas);
           datosGenerados = true;
           break;
         case 2: case 3: case 4: case 5: 
           if (datosGenerados) {    // si se han los tiempos y dorsales
             switch (opcion) {
               case 2:
-                mostrarGanadorVuelta(etapas, ciclistas, nombresCiclistas);
+                mostrarGanadorVuelta(etapas, dorsalesCiclistas, nombresCiclistas);
                 break;
               case 3:
-                mostrarGanadorEtapa(etapas, ciclistas, nombresCiclistas);
+                mostrarGanadorEtapa(etapas, dorsalesCiclistas, nombresCiclistas);
                 break;
               case 4:
-                mostrarGanadoresEtapas(etapas, ciclistas, nombresCiclistas);
+                mostrarGanadoresEtapas(etapas, dorsalesCiclistas, nombresCiclistas);
                 break;
               case 5:
-                mostrarTiempos(etapas, ciclistas, nombresCiclistas);
+                mostrarTiempos(etapas, dorsalesCiclistas, nombresCiclistas);
             }
           } else {
             System.out.println("Primero debe generar los tiempos y dorsales.\n");
@@ -128,9 +128,9 @@ public class MenuVueltaCiclista {
    * Genera los tiempos y dorsales aleatoriamente.
    * 
    * @param etapas
-   * @param ciclistas 
+   * @param dorsalesCiclistas 
    */
-  public static void generaDatos(int[][] etapas, int[] ciclistas) {
+  public static void generaDatos(int[][] etapas, int[] dorsalesCiclistas) {
     boolean[] dorsalGenerado = new boolean[DORSAL_MAX - DORSAL_MIN + 1];  // para controlar repeticiones dorsales
     
     // inicializamos a falso los testigos de los dorsales
@@ -147,7 +147,7 @@ public class MenuVueltaCiclista {
         dorsal = DORSAL_MIN + (int) (Math.random() * (DORSAL_MAX - DORSAL_MIN + 1));
       } while (dorsalGenerado[dorsal - DORSAL_MIN]);
       dorsalGenerado[dorsal - DORSAL_MIN] = true;   // marcamos como generado
-      ciclistas[i] = dorsal;
+      dorsalesCiclistas[i] = dorsal;
       
       // etapas
       for (int j = 0; j < NUM_ETAPAS; j++) {

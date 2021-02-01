@@ -45,18 +45,23 @@ import java.util.Scanner;
  *  - Dado el número de un ejercicio, devolver la nota más alta obtenida.
  *  - Dado el número de un ejercicio, devolver la nota más baja obtenida (sin contar -1).
  *  
+ *  Usaremos el array de notas y estudiantes como global.
+ *  
  * @author Rafael del Castillo Gomariz
  *
  */
 
-public class MenuEjerciciosAlumnado {
+public class MenuEjerciciosAlumnado2 {
   
+  // Constantes
   final static public int NUM_NOTAS = 5;
   final static public int NUM_ESTUDIANTES = 15;
+  
+  // Nombres de estudiantes y notas
+  static public String[] estudiantes = new String[NUM_ESTUDIANTES];
+  static public int[][] notas = new int[NUM_ESTUDIANTES][NUM_NOTAS];
 
   public static void main(String[] args) {
-    String[] estudiantes = new String[NUM_ESTUDIANTES];
-    int[][] notas = new int[NUM_ESTUDIANTES][NUM_NOTAS];
     int opcion;
     boolean continuar = true;
     boolean datosGenerados = false;
@@ -71,35 +76,35 @@ public class MenuEjerciciosAlumnado {
       opcion = menu();
       switch (opcion) {
         case 1: // generamos las calificaciones
-          generaCalificaciones(notas);
+          generaCalificaciones();
           datosGenerados = true;
           break;
         case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
           if (datosGenerados) {    // si se han las calificaciones
             switch (opcion) {
               case 2:
-                mostrarEjerciciosEntregados(estudiante(), notas, estudiantes);
+                mostrarEjerciciosEntregados(estudiante());
                 break;
               case 3:
-                mostrarMediaEjercicios(estudiante(), notas, estudiantes);
+                mostrarMediaEjercicios(estudiante());
                 break;
               case 4:
-                System.out.println(numeroEstudiantesEntregaTodoConNotaMayor(5, notas) + " estudiantes.\n");
+                System.out.println(numeroEstudiantesEntregaTodoConNotaMayor(5) + " estudiantes.\n");
                 break;
               case 5:
-                System.out.println(numeroEstudiantesPresentaEjercicio(ejercicio(), notas) + " estudiantes.\n");
+                System.out.println(numeroEstudiantesPresentaEjercicio(ejercicio()) + " estudiantes.\n");
                 break;
               case 6:
-                System.out.println("La media es " + mediaEjercicio(ejercicio(), notas) + "\n");
+                System.out.println("La media es " + mediaEjercicio(ejercicio()) + "\n");
                 break;
               case 7:
-                System.out.println("La máxima nota es " + maximoEjercicio(ejercicio(), notas) + "\n");
+                System.out.println("La máxima nota es " + maximoEjercicio(ejercicio()) + "\n");
                 break;
               case 8:
-                System.out.println("La mínima nota es " + minimoEjercicio(ejercicio(), notas) + "\n");
+                System.out.println("La mínima nota es " + minimoEjercicio(ejercicio()) + "\n");
                 break;
               case 9:
-                mostrarNotas(notas, estudiantes);
+                mostrarNotas();
             }
             pausa();
           } else {
@@ -163,7 +168,7 @@ public class MenuEjerciciosAlumnado {
    * 
    * @param notas
    */
-  public static void generaCalificaciones(int[][] notas) {
+  public static void generaCalificaciones() {
     for (int i = 0; i < NUM_ESTUDIANTES; i++) {
       for (int j = 0; j < NUM_NOTAS; j++) {
         notas[i][j] = -1 + (int) (Math.random()*12);
@@ -215,9 +220,9 @@ public class MenuEjerciciosAlumnado {
    * @param notas
    * @param estudiantes
    */
-  public static void mostrarEjerciciosEntregados(int estudiante, int[][] notas, String[] estudiantes) {
+  public static void mostrarEjerciciosEntregados(int estudiante) {
     System.out.println(estudiantes[estudiante-1] + " ha entregado " + 
-                        ejerciciosEntregados(estudiante, notas) + " ejercicios.\n");
+                        ejerciciosEntregados(estudiante) + " ejercicios.\n");
   }
   
   /**
@@ -226,7 +231,7 @@ public class MenuEjerciciosAlumnado {
    * @param notas
    * @return
    */
-  public static int ejerciciosEntregados(int estudiante, int[][] notas) {
+  public static int ejerciciosEntregados(int estudiante) {
     int entregados = 0;
     
     for (int nota: notas[estudiante-1]) {
@@ -244,9 +249,9 @@ public class MenuEjerciciosAlumnado {
    * @param notas
    * @param estudiantes
    */
-  public static void mostrarMediaEjercicios(int estudiante, int[][] notas, String[] estudiantes) {
+  public static void mostrarMediaEjercicios(int estudiante) {
     System.out.println(estudiantes[estudiante-1] + " tiene una media de " + 
-        mediaEjercicios(estudiante, notas) + ".\n");
+        mediaEjercicios(estudiante) + ".\n");
   }
 
   /**
@@ -257,7 +262,7 @@ public class MenuEjerciciosAlumnado {
    * @param notas
    * @return media
    */
-  public static double mediaEjercicios(int estudiante, int[][] notas) {
+  public static double mediaEjercicios(int estudiante) {
     double suma = 0;
     
     for (int nota: notas[estudiante-1]) {
@@ -276,7 +281,7 @@ public class MenuEjerciciosAlumnado {
    * @param ejercicio
    * @return número de estudiantes.
    */
-  public static int numeroEstudiantesPresentaEjercicio(int ejercicio, int[][] notas) {
+  public static int numeroEstudiantesPresentaEjercicio(int ejercicio) {
     int n = 0;
     
     for (int i = 0; i < NUM_ESTUDIANTES; i++) {
@@ -293,7 +298,7 @@ public class MenuEjerciciosAlumnado {
    * @param notas
    * @return media
    */
-  public static double mediaEjercicio(int ejercicio, int[][] notas) {
+  public static double mediaEjercicio(int ejercicio) {
     double suma = 0;
     int numEstudiantes = 0;
     
@@ -312,7 +317,7 @@ public class MenuEjerciciosAlumnado {
    * @param notas
    * @return máxima calificación
    */
-  public static int maximoEjercicio(int ejercicio, int[][] notas) {
+  public static int maximoEjercicio(int ejercicio) {
     int maximo = Integer.MIN_VALUE;
     
     for (int i = 0; i < NUM_ESTUDIANTES; i++) {
@@ -329,7 +334,7 @@ public class MenuEjerciciosAlumnado {
    * @param notas
    * @return
    */
-  public static int minimoEjercicio(int ejercicio, int[][] notas) {
+  public static int minimoEjercicio(int ejercicio) {
     int minimo = Integer.MAX_VALUE;
     
     for (int i = 0; i < NUM_ESTUDIANTES; i++) {
@@ -348,19 +353,19 @@ public class MenuEjerciciosAlumnado {
    * @param notas
    * @return
    */
-  public static int numeroEstudiantesEntregaTodoConNotaMayor(int nota, int[][] notas) {
+  public static int numeroEstudiantesEntregaTodoConNotaMayor(int nota) {
     int n = 0;
     
     for (int i = 0; i < NUM_ESTUDIANTES; i++) {
       // si ha entregado todo compruebo que la media sea mayor que nota, entonces contabilizo
-      if (ejerciciosEntregados(i+1, notas) == NUM_NOTAS && mediaEjercicios(i+1, notas) >= nota) {
+      if (ejerciciosEntregados(i+1) == NUM_NOTAS && mediaEjercicios(i+1) >= nota) {
         n++;
       }
     }
     return n;
   }
 
-  public static void mostrarNotas(int[][] notas, String[] estudiantes) {
+  public static void mostrarNotas() {
     // cabecera
     System.out.print(" ".repeat(25));   // blancos iniciales
     for (int nota = 1; nota <= NUM_NOTAS; nota++) {
