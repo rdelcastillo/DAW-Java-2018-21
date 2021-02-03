@@ -27,7 +27,7 @@ public class TestFraccion {
     x.setNumerador(s.nextInt());
     x.setDenominador(s.nextInt());
     System.out.println("Nueva fracción: " + x);
-    x.simplifica();
+    x.simplificar();
     System.out.println("Simplificada..: " + x + "\n");
     
     // Probamos resultado

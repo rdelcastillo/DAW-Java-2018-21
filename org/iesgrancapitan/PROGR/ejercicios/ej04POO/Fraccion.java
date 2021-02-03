@@ -89,16 +89,17 @@ public class Fraccion implements Comparable<Fraccion>, Cloneable {
   }
   
   @Override
-  public int hashCode() {
+  public int hashCode() {   // tiene en cuenta que dos fracciones equivalentes son iguales
     final int prime = 31;
     int result = 1;
-    result = prime * result + denominador;
-    result = prime * result + numerador;
+    int mcd = Fraccion.maximoComunDivisor(numerador, denominador);  // para simplificar numerador y denominador
+    result = prime * result + denominador/mcd;
+    result = prime * result + numerador/mcd;
     return result;
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(Object obj) {   // tiene en cuenta que dos fracciones equivalentes son iguales
     if (this == obj)
       return true;
     if (obj == null)
@@ -106,13 +107,17 @@ public class Fraccion implements Comparable<Fraccion>, Cloneable {
     if (getClass() != obj.getClass())
       return false;
     Fraccion other = (Fraccion) obj;
-    if (denominador != other.denominador)
+    other.simplificar();    // simplifico para poder comparar fracciones equivalentes
+    Fraccion copiaSimplificada = this.clone();
+    copiaSimplificada.simplificar();
+    if (copiaSimplificada.denominador != other.denominador)
       return false;
-    if (numerador != other.numerador)
+    if (copiaSimplificada.numerador != other.numerador)
       return false;
     return true;
   }
 
+  
   //resto de métodos
   
   public double resultado() {
@@ -139,7 +144,7 @@ public class Fraccion implements Comparable<Fraccion>, Cloneable {
   /**
    * Me simplifica la fracción diviendo numerador y denominador por su MCD.
    */
-  public void simplifica() {
+  public void simplificar() {
     int mcd = Fraccion.maximoComunDivisor(this.numerador, this.denominador);
     
     // Simplifico
