@@ -21,11 +21,20 @@ package org.iesgrancapitan.PROGR.ejercicios.ej04POO;
  * Las opciones a partir de la segunda, solo se realizarán si la fecha almacenada es correcta, en caso de no serlo, se dará un aviso, 
  * por la salida estándar de errores, de que la operación no se puede realizar.
  * 
+ * Versión 2.0:
+ * 
+ * - Implementar las interfaces Comparable y Cloneable.
+ * - Crear equals() y hashCode().
+ * - Hacer un método para restar fechas.
+ * - Va a cambiar los nombres de los métodos a verbos en infinitivo.
+ * 
+ * Las anteriores versiones pueden verse desde GitHub buscando por el tag.
+ * 
  * @author Rafael del Castillo
  *
  */
 
-public class Fecha {
+public class Fecha implements Comparable<Fecha>, Cloneable {
   private int dia;
   private int mes;
   private int anyo;
@@ -93,7 +102,7 @@ public class Fecha {
   /**
    * @return Nombre del mes del objeto.
    */
-  public String nombreMes() {
+  public String getNombreMes() {
     String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
         "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     
@@ -107,19 +116,46 @@ public class Fecha {
 
   /**
    * Clona el objeto actual.
-   * Ojo, en Java podemos implementar la intefaz Cloneable y que tiene el método clone().
    * 
    * @return Copia del objeto actual
    */
-  public Fecha clona() {
+  public Fecha clone() {
     return new Fecha(this.dia, this.mes, this.anyo);
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + anyo;
+    result = prime * result + dia;
+    result = prime * result + mes;
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Fecha other = (Fecha) obj;
+    if (anyo != other.anyo)
+      return false;
+    if (dia != other.dia)
+      return false;
+    if (mes != other.mes)
+      return false;
+    return true;
   }
 
   /**
    * Suma un día a la fecha almacenada.
    * 
    */
-  private void suma1Dia() {
+  private void sumar1Dia() {
     
     if (! this.esCorrecta()) {    // solo operamos si la fecha es correcta
       System.err.println("No se puede operar con una fecha incorrecta");
@@ -144,7 +180,7 @@ public class Fecha {
    * 
    * @param dias
    */
-  public void sumaDias(int dias) {
+  public void sumarDias(int dias) {
     
     if (! this.esCorrecta()) {      // solo operamos si la fecha es correcta
       System.err.println("No se puede operar con una fecha incorrecta");
@@ -153,11 +189,11 @@ public class Fecha {
     
     if (dias>=0) {                  // si los días son + sumo, sino resto
       for (int i=1; i<=dias; i++) {
-        this.suma1Dia();
+        this.sumar1Dia();
       }
     } else {
       for (int i=1; i<=Math.abs(dias); i++) {
-        this.resta1Dia();
+        this.restar1Dia();
       }
     }
   }
@@ -166,7 +202,7 @@ public class Fecha {
    * Resta un día a la fecha almacenada.
    * 
    */
-  public void resta1Dia() {
+  public void restar1Dia() {
     
     if (! this.esCorrecta()) {    // solo operamos si la fecha es correcta
       System.err.println("No se puede operar con una fecha incorrecta");
@@ -193,7 +229,7 @@ public class Fecha {
    * 
    * @param dias
    */
-  public void restaDias(int dias) {
+  public void restarDias(int dias) {
     
     if (! this.esCorrecta()) {          // solo operamos si la fecha es correcta
       System.err.println("No se puede operar con una fecha incorrecta");
@@ -202,11 +238,11 @@ public class Fecha {
     
     if (dias>=0) {
       for (int i=1; i<=dias; i++) {     // si los días son + resto, sino sumo
-        this.resta1Dia();
+        this.restar1Dia();
       }
     } else {
       for (int i=1; i<=Math.abs(dias); i++) {
-        this.suma1Dia();
+        this.sumar1Dia();
       }
     }
   }
@@ -234,7 +270,7 @@ public class Fecha {
    * @param fecha2
    * @return <0 si fecha1<fecha2, 0 si fecha1==fecha2, >0 si fecha1>fecha2
    */
-  public int compara(Fecha fecha2) {
+  public int compareTo(Fecha fecha2) {
     // solo operamos si la fecha es correcta
     if (! this.esCorrecta()) {    
       System.err.println("No se puede operar con una fecha incorrecta");
@@ -256,7 +292,7 @@ public class Fecha {
 
   @Override
   public String toString() {
-    return this.dia + " de " + this.nombreMes() + " de " + this.anyo;
+    return this.dia + " de " + this.getNombreMes() + " de " + this.anyo;
   }
 
   // Métodos estáticos
@@ -276,6 +312,29 @@ public class Fecha {
       diasMes_[1] = 29;
     }
     return diasMes_[mes - 1];
+  }
+  
+  /**
+   * @param fecha1
+   * @param fecha2
+   * @return Número de días (con signo) entre fecha1 y fecha2.
+   */
+  public static int restar(Fecha fecha1, Fecha fecha2) {
+    int dias = 0;
+    Fecha f1 = fecha1.clone(); // primera fecha ¡no se puede igualar!
+    
+    // sumamos o restamos días hasta que f1 llegue a fecha2
+    if (fecha1.compareTo(fecha2) < 0) {     // los días serán negativos ya que fecha1 < fecha2
+      for (; f1.equals(fecha2); dias--) {   
+        f1.sumar1Dia();
+      }
+    } else {                                // los días serán positivos ya que fecha1 >= fecha2
+      for (; f1.equals(fecha2); dias++) {   // los días serán negativos ya que fecha1 < fecha2
+        f1.restar1Dia();
+      }
+    }
+    
+    return dias;
   }
 
 }

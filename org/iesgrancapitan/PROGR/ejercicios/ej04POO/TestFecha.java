@@ -14,7 +14,7 @@ public class TestFecha {
   public static void main(String[] args) {
     Fecha f1 = new Fecha(10, 2, 2020);
     Fecha f2 = new Fecha(29, 2, 2020);
-    Fecha f3 = f1.clona();
+    Fecha f3 = f1.clone();
     Fecha f4 = f1;
     
     // Inicio
@@ -35,17 +35,17 @@ public class TestFecha {
     System.out.println("Fecha1: " + f1 + "\n");
     
     // Comparamos
-    System.out.println("Comparamos Fecha1 (" + f1 + ") y Fecha2 (" + f2 + ") " + f1.compara(f2));
-    System.out.println("Comparamos Fecha3 (" + f3 + ") y Fecha1 (" + f1 + ") " + f3.compara(f1) + "\n");
+    System.out.println("Comparamos Fecha1 (" + f1 + ") y Fecha2 (" + f2 + ") " + f1.compareTo(f2));
+    System.out.println("Comparamos Fecha3 (" + f3 + ") y Fecha1 (" + f1 + ") " + f3.compareTo(f1) + "\n");
     System.out.println("¿'" + f1 + "' es igual a '" + f4 + "'? " + f1.esIgual(f4));
     System.out.println("¿'" + f2 + "' a '" + f3 +"'? " + f2.esIgual(f3) + "\n");
     
     // Sumamos y restamos
     System.out.print("Sumamos 50 días a Fecha1 (" + f1 + ") y se lo asignamos a Fecha2: ");
-    f1.sumaDias(50);
-    f2 = f1.clona();
+    f1.sumarDias(50);
+    f2 = f1.clone();
     System.out.println(f2);
-    f2.restaDias(50);
+    f2.restarDias(50);
     System.out.println("Y Fecha2 sin esos 50 días es Fecha1: " + f2);
   }
 
