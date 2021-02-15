@@ -42,11 +42,13 @@ public class EjemploArrayList {
 
     // Accedemos
 
-    StringBuilder cadena = arrayList1.get(0);
+    StringBuilder cadena = arrayList1.get(0);           // get() devuelve un elemento dada su posición
+                                                        // indexOf() devuelve una posición dado un elemento
+    System.out.print("Al elemento \"" + cadena + "\" que está en la posición " + 
+                      arrayList1.indexOf(cadena) + " le damos la vuelta --> ");
 
-    cadena.reverse();                                   // ojo!!! el objeto es mutable
-
-    System.out.println("arrayList1 --> " + arrayList1); // el contenido ha cambiado
+    cadena.reverse();               // ojo!!! el objeto es mutable
+    System.out.println(arrayList1); // el contenido ha cambiado
 
     // Probamos contains() y clear()
 
@@ -70,7 +72,7 @@ public class EjemploArrayList {
 
     System.out.println(arrayList3);
 
-    System.out.print("Borramos lo que hay en la posición 3 de " + arrayList3 + " --> ");
+    System.out.print("Borramos el valor 3 de " + arrayList3 + " --> ");
 
     arrayList3.remove(Integer.valueOf(3));  // no borramos el elemento que hay en la posición 3, sino el objeto cuyo valor es 3
 
@@ -78,9 +80,9 @@ public class EjemploArrayList {
 
     // Probamos removeAll() 
 
-    System.out.print("Borramos de " + arrayList4 + " 1, 3 y 5 --> ");
+    System.out.print("Borramos de " + arrayList4 + " 1, 3 y 6 --> ");
 
-    arrayList4.removeAll(List.of(1,3,5));   // removeAll() borra del arraylist los elementos de la colección recibida
+    arrayList4.removeAll(List.of(1,3,6));   // removeAll() borra del arraylist los elementos de la colección recibida
 
     System.out.println(arrayList4);
 
@@ -106,11 +108,19 @@ public class EjemploArrayList {
     
     System.out.println(arrayList4);
     
+    // Probamos set
+    
+    System.out.print("Cambiamos en " + arrayList1 + " \"" + arrayList1.get(0) + "\" por \"uno\" --> ");
+    
+    arrayList1.set(0, new StringBuilder("uno"));    // pongo un elemento en la posición indicada
+    
+    System.out.println(arrayList1);
+    
     // Ordenamos
     
     System.out.print("Ordenamos " + arrayList4 + " --> ");
     
-    Collections.sort(arrayList4);                               // ordenamos por su orden "natural"
+    Collections.sort(arrayList4);   // ordenamos por su orden "natural"
     
     System.out.println(arrayList4);
     
