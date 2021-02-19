@@ -9,6 +9,8 @@ package org.iesgrancapitan.PROGR.ejercicios.ej04POO;
 
 public class Dado {
   
+  private static final int NUMERO_CARAS_DADO = 6;
+  
   private int cara;
 
   public Dado() {
@@ -19,8 +21,9 @@ public class Dado {
     return cara;
   }
 
-  public void tirar() {
-    this.cara = 1 + (int) (Math.random() * 6);
+  public int tirar() {
+    this.cara = 1 + (int) (Math.random() * NUMERO_CARAS_DADO);
+    return this.cara;
   }
 
 }
