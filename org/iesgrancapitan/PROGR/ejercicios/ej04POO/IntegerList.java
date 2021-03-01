@@ -3,7 +3,7 @@ package org.iesgrancapitan.PROGR.ejercicios.ej04POO;
 import java.util.Arrays;
 
 /**
- * Esta clase representará una estructura de datos tipo lista de números enteros.
+ * Esta clase representará una estructura de datos tipo lista de números enteros (versión 2.0).
  * 
  * Estado de los objetos:
  * 
@@ -43,6 +43,10 @@ import java.util.Arrays;
  * 
  * - maxSize(): tamaño máximo de la lista.
  * 
+ * En esta versión mejoraremos algunos aspectos del código y añadiremos las siguientes excepciones: 
+ * 
+ * - Método insert() cuando pongamos que se añada algo en una posición incorrecta: IndexOutOfBoundsException.
+ * - Método pop() cuando la lista esté vacía (marcada).
  * 
  * @author Rafael del Castillo Gomariz
  *
@@ -50,16 +54,10 @@ import java.util.Arrays;
 
 public class IntegerList {
 
-  // variables de clase
-
   private static final int DEFAULT_MAX_SIZE = 10;
-
-  // variables de instancia
 
   private int[] content;    // array donde almacenamos los elementos de la lista
   private int contentSize;  // tamaño de la lista (nº de elementos almacenados)
-
-  // constructores
 
   public IntegerList() {
     this.contentSize = 0;
@@ -71,19 +69,14 @@ public class IntegerList {
     
     // Si el número de parámetros que llegan es mayor que DEFAULT_MAX_SIZE, 
     // el tamaño máximo de mi array aumenta a esta cantidad.
-    if (content.length > DEFAULT_MAX_SIZE) {
-      this.content = new int[content.length];
-    } else {
-      this.content = new int[DEFAULT_MAX_SIZE]; 
-    }
+    this.content = (content.length > DEFAULT_MAX_SIZE) 
+        ? new int[content.length] : new int[DEFAULT_MAX_SIZE];
     
     // meto los valores llegados como parámetros en el array
     for (int i = 0; i < content.length; i++) {
       this.content[i] = content[i];
     }
   }
-
-  // resto métodos
 
   /**
    * Añade un elemento al final de la lista. 
@@ -108,61 +101,71 @@ public class IntegerList {
    * @return éxito de la operación
    */
   public boolean insert(int element, int pos) {
-    // si lista llena acabamos
-    if (this.isFull() || pos < 0) {    
+    if (pos == this.contentSize) {  // inserción al final (normal)
+      return this.insert(element); 
+    }
+    
+    if (this.isErrorPosition(pos)) {
+      throw new IndexOutOfBoundsException("Posición fuera de los límites de la lista.");
+    }
+
+    if (this.isFull()) {    
       return false;
     }
     
-    // si la posición donde debe insertarse es igual o superior al número de elementos 
-    // que hay, insertamos al final
-    if (pos >= this.contentSize) {
-      return this.insert(element);
-    }
-    
-    // situación más común, insertamos en medio
-    
     // desplazamos a la derecha los elementos que están a partir de la posición que hay que insertar
-    for (int i = this.contentSize-1; i >= pos; i--) {
-      this.content[i+1] = this.content[i];
-    }
+    this.scrollRight(pos);
+    
     // insertamos el elemento
     this.content[pos] = element;
-    
     ++this.contentSize;
     return true;    
   }
+
+  private boolean isErrorPosition(int pos) {
+    return pos < 0 || pos >= this.contentSize;
+  }
   
- 
+  private void scrollRight(int pos) {
+    for (int i = this.contentSize-1; i >= pos; i--) {
+      this.content[i+1] = this.content[i];
+    }
+  }
+  
   /**
    * Devuelve el último elemento de la lista y lo elimina.
    * @return último elemento de la lista
+   * @throws IntegerListEmptyException 
    */
-  public int pop() {
-    // lista vacía (deberíamos lanzar una excepción, en una siguiente versión)
+  public int pop() throws IntegerListEmptyException {
     if (this.isEmpty()) {   
-      System.err.println("Excepción. La lista está vacía.");
-      return 0;
+      throw new IntegerListEmptyException("Lista vacía.");
     }
-    
-    // situación común
     --this.contentSize;
     return this.content[this.contentSize];
   }
   
-  public int pop(int pos) {
-    // lista vacía o posición inexistente (deberíamos lanzar una excepción, en una siguiente versión)
-    if (this.isEmpty() || pos >= this.contentSize || pos < 0) {   
-      System.err.println("Excepción. Posición errónea.");
-      return 0;
+  public int pop(int pos) throws IntegerListEmptyException {
+    if (this.isErrorPosition(pos)) {
+      throw new IndexOutOfBoundsException("Posición fuera de los límites de la lista.");
+    }
+    if (this.isEmpty()) {   
+      throw new IntegerListEmptyException("Lista vacía");
     }
     
-    // situación común
     int aDevolver = this.content[pos];
+    
+    // desplazamos a la izquierda los elementos a partir de la posición que hay que eliminar
+    scrollLeft(pos);
+    
+    --this.contentSize;
+    return aDevolver;
+  }
+
+  private void scrollLeft(int pos) {
     for (int i = pos; i < this.contentSize-1; i++) {
       this.content[i] = this.content[i+1];
     }
-    --this.contentSize;
-    return aDevolver;
   }
   
   /**
@@ -172,29 +175,32 @@ public class IntegerList {
    * @return éxito de la operación.
    */
   public boolean remove(int element) {
-    // si lista vacia acabamos
-    if (this.isEmpty()) {
+    if (this.isEmpty()) {   // si lista vacia acabamos
       return false;
     }
     
-    // buscamos element dentro de la lista
+    // buscamos element en la lista, si no está terminamos
+    int posicionElement = this.indexOf(element);
+    if (posicionElement < 0) {
+      return false;
+    }
+    
+    // desplazamos a la izquierda los elementos a partir de la posición que hay que eliminar
+    scrollLeft(posicionElement);
+    
+    --this.contentSize;
+    return true;
+  }
+
+  private int indexOf(int element) {
     int posicionElement = 0;
     while (posicionElement < this.contentSize-1 && this.content[posicionElement] != element) {
       posicionElement++;
     }
-
-    // si no está en la lista terminamos
-    if (this.content[posicionElement] != element) {
-      return false;
+    if (this.content[posicionElement] != element) { // si no es el último no está
+      return -1;
     }
-    
-    // desplazamos a la izquierda los elementos a partir de posicionElement
-    for (int i = posicionElement; i < this.contentSize-1; i++) {
-      this.content[i] = this.content[i+1];
-    }
-    
-    --this.contentSize;
-    return true;
+    return posicionElement;
   }
   
   /**
@@ -228,14 +234,17 @@ public class IntegerList {
     if (newMaxSize <= this.getContentSize()) {
       return false;
     }
-    
-    // situación más común
-    int[] newContent = new int[newMaxSize]; // nuevo array al que copiamos los datos de la lista
+    // nuevo array al que copiamos los datos de la lista
+    this.content = this.copy(newMaxSize);
+    return true;
+  }
+
+  private int[] copy(int newMaxSize) {
+    int[] newContent = new int[newMaxSize]; 
     for (int i = 0; i < this.contentSize; i++) {
       newContent[i] = this.content[i];
     }
-    this.content = newContent;
-    return true;
+    return newContent;
   }
   
   /**
