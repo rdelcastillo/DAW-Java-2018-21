@@ -325,12 +325,12 @@ public class Fecha implements Comparable<Fecha>, Cloneable {
     Fecha f1 = fecha1.clone(); // primera fecha ¡no se puede igualar!
     
     // sumamos o restamos días hasta que f1 llegue a fecha2
-    if (fecha1.compareTo(fecha2) < 0) {     // los días serán negativos ya que fecha1 < fecha2
-      for (; f1.equals(fecha2); dias--) {   
+    if (fecha1.compareTo(fecha2) < 0) {             // los días serán negativos ya que fecha1 < fecha2
+      for (; f1.compareTo(fecha2) < 0; dias--) {   
         f1.sumar1Dia();
       }
-    } else {                                // los días serán positivos ya que fecha1 >= fecha2
-      for (; f1.equals(fecha2); dias++) {   // los días serán negativos ya que fecha1 < fecha2
+    } else {                                        // los días serán positivos ya que fecha1 >= fecha2
+      for (; f1.compareTo(fecha2) > 0; dias++) {    // los días serán negativos ya que fecha1 < fecha2
         f1.restar1Dia();
       }
     }
