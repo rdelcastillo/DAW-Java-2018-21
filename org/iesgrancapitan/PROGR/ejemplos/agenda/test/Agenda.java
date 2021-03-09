@@ -13,8 +13,9 @@ public class Agenda {
 
   public static void main(String[] args) {
     Menu menu = new Menu("AGENDA", "Alta de contacto", "Baja de contacto", "Mostrar agenda", 
-                                   "Guardar agenda", "Recuperar agenda (perdiendo datos actuales)", 
-                                   "Salir");
+        "Guardar agenda", "Recuperar agenda (perdiendo datos actuales)", 
+        "Exportar CSV", "Importar CSV", "Exportar XML", "Importar XML",
+        "Salir");
     boolean continuar = true;
 
     do {
@@ -33,6 +34,18 @@ public class Agenda {
           break;
         case 5:
           recuperar();
+          break;
+        case 6:
+          exportarCSV();
+          break;
+        case 7:
+          importarCSV();
+          break;
+        case 8:
+          exportarXML();
+          break;
+        case 9:
+          importarXML();
           break;
         default:
           continuar = false;
@@ -75,7 +88,7 @@ public class Agenda {
     System.out.print("Teléfono del contacto a dar de alta.: ");
     String telefono = s.nextLine();
     return (telefono.isBlank()) ?
-          new Contact(nombre, apellidos, direccion, email):
+        new Contact(nombre, apellidos, direccion, email):
           new Contact(nombre, apellidos, direccion, email, telefono);
   }
 
@@ -101,15 +114,15 @@ public class Agenda {
     String apellidos = s.nextLine();
 
     return new Contact(nombre, apellidos, "Sin dirección");
-  }
+  }   
+  // Contactos de mi agenda
+
 
   private static void recuperar() {
     try {
-      Scanner s = new Scanner(System.in);
+      String fichero = pedirFichero("Nombre del fichero donde está guardada la agenda");
+      agenda = AddressBook.load(fichero);
 
-      System.out.print("Nombre del fichero donde está guardada la agenda: ");
-      agenda = AddressBook.load(s.nextLine());
-      
     } catch (ClassNotFoundException | IOException e) {
       System.err.println("No se ha podido recuperar la agenda.\n");
     }
@@ -117,18 +130,53 @@ public class Agenda {
 
   private static void guardar() {
     try {
-      Scanner s = new Scanner(System.in);
+      String fichero = pedirFichero("Nombre del fichero donde guardar la agenda");
+      agenda.save(fichero);
 
-      System.out.print("Nombre del fichero donde guardar la agenda: ");
-      agenda.save(s.nextLine());
-      
     } catch (IOException e) {
       System.err.println("No se ha podido guardar el fichero.\n");
-      e.printStackTrace();
     }
   }
-  
+
+  private static void exportarCSV() {
+    try {
+      String fichero = pedirFichero("Nombre del fichero donde exportar a CSV la agenda");
+      agenda.saveCSV(fichero);
+
+    } catch (IOException e) {
+      System.err.println("No se ha podido exportar a CSV.\n");
+    }
+  }
+
+  private static void importarCSV() {
+    // TODO Auto-generated method stub
+
+  }
+
+  private static void exportarXML() {
+    try {
+      String fichero = pedirFichero("Nombre del fichero donde exportar a XML la agenda");
+      agenda.saveXML(fichero);
+
+    } catch (IOException e) {
+      System.err.println("No se ha podido exportar a XML.\n");
+    }
+
+  }
+
+  private static void importarXML() {
+    // TODO Auto-generated method stub
+
+  }
+
+
   private static void mostrar() {
     System.out.println(agenda + "\n");    
+  }
+
+  private static String pedirFichero(String mensaje) {
+    Scanner s = new Scanner(System.in);
+    System.out.print(mensaje +": ");
+    return s.nextLine();
   }
 }
