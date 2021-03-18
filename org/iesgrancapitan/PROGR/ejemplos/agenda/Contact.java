@@ -120,11 +120,6 @@ public class Contact implements Comparable<Contact>, Serializable {
   }
 
   @Override
-  public String toString() {
-    return "Contacto [name=" + name + ", surnames=" + surnames + ", address=" + address + ", phone=" + phone + ", email=" + email + "]";
-  }
-
-  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -159,4 +154,15 @@ public class Contact implements Comparable<Contact>, Serializable {
   public int compareTo(Contact o) {
     return this.getSurnamesName().compareTo(o.getSurnamesName());
   }
+
+  @Override
+  public String toString() {
+    return "Contact [" + (name != null ? "name=" + name + ", " : "")
+        + (surnames != null ? "surnames=" + surnames + ", " : "")
+        + (address != null ? "address=" + address + ", " : "")
+        + (phone != null ? "phone=" + phone + ", " : "") + (email != null ? "email=" + email : "")
+        + "]";
+  }
+
+  
 }

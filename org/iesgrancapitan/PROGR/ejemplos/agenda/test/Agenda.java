@@ -3,9 +3,18 @@ package org.iesgrancapitan.PROGR.ejemplos.agenda.test;
 import java.io.IOException;
 import java.util.Scanner;
 import org.iesgrancapitan.PROGR.ejemplos.agenda.AddressBook;
+import org.iesgrancapitan.PROGR.ejemplos.agenda.AddressBookCSVException;
+import org.iesgrancapitan.PROGR.ejemplos.agenda.AddressBookXMLException;
 import org.iesgrancapitan.PROGR.ejemplos.agenda.Contact;
 import org.iesgrancapitan.PROGR.ejemplos.agenda.ContactErrorException;
 import org.iesgrancapitan.PROGR.ejercicios.ej04POO.Menu;
+
+/**
+ * Prueba de la clase AddressBook implementando una agenda.
+ * 
+ * @author Rafael del Castillo Gomariz
+ *
+ */
 
 public class Agenda {
 
@@ -14,11 +23,11 @@ public class Agenda {
   public static void main(String[] args) {
     Menu menu = new Menu("AGENDA", "Alta de contacto", "Baja de contacto", "Mostrar agenda", 
         "Guardar agenda", "Recuperar agenda (perdiendo datos actuales)", 
-        "Exportar CSV", "Importar CSV", "Exportar XML", "Importar XML",
+        "Exportar CSV", "Recuperar CSV (perdiendo datos actuales)", 
+        "Exportar XML", "Recuperar XML (perdiendo datos actuales)",
         "Salir");
-    boolean continuar = true;
-
-    do {
+    
+    while (true) {
       switch (menu.elegir()) {
         case 1:
           alta();
@@ -39,29 +48,28 @@ public class Agenda {
           exportarCSV();
           break;
         case 7:
-          importarCSV();
+          recuperarCSV();
           break;
         case 8:
           exportarXML();
           break;
         case 9:
-          importarXML();
+          recuperarXML();
           break;
         default:
-          continuar = false;
+          System.out.println("\n¡Hasta la próxima!");
+          System.exit(0);
       } 
-    } while (continuar);
+    } 
   }
 
   private static void alta() {
     try {
       Contact contactoAlta = getContactoAlta();
-
       if (agenda.contains(contactoAlta)) {
         System.err.println("Ya existe ese contacto.\n");
         return;
       }
-
       agenda.add(contactoAlta);
       System.out.println("Contacto dado de alta.\n");
 
@@ -89,7 +97,7 @@ public class Agenda {
     String telefono = s.nextLine();
     return (telefono.isBlank()) ?
         new Contact(nombre, apellidos, direccion, email):
-          new Contact(nombre, apellidos, direccion, email, telefono);
+        new Contact(nombre, apellidos, direccion, email, telefono);
   }
 
   private static void baja() {
@@ -144,12 +152,20 @@ public class Agenda {
       agenda.saveCSV(fichero);
 
     } catch (IOException e) {
-      System.err.println("No se ha podido exportar a CSV.\n");
+      System.err.println("No se ha podido exportar a CSV: " + e.getMessage() + "\n");
     }
   }
 
-  private static void importarCSV() {
-    // TODO Auto-generated method stub
+  private static void recuperarCSV() {
+    try {
+      String fichero = pedirFichero("Nombre del fichero CSV");
+      agenda = AddressBook.loadCSV(fichero);
+
+    } catch (IOException e) {
+      System.err.println("Ha habido problemas al cargar el fichero.\n");
+    } catch (AddressBookCSVException e) {
+      System.err.println("Ha habido problemas con el formato del CSV: " + e.getMessage() + "\n");
+    }
 
   }
 
@@ -158,17 +174,24 @@ public class Agenda {
       String fichero = pedirFichero("Nombre del fichero donde exportar a XML la agenda");
       agenda.saveXML(fichero);
 
-    } catch (IOException e) {
-      System.err.println("No se ha podido exportar a XML.\n");
+    } catch (IOException | AddressBookXMLException e) {
+      System.err.println("No se ha podido exportar a XML: " + e.getMessage() + "\n");
     }
 
   }
 
-  private static void importarXML() {
-    // TODO Auto-generated method stub
+  private static void recuperarXML() {
+    try {
+      String fichero = pedirFichero("Nombre del fichero XML");
+      agenda = AddressBook.loadXML(fichero);
+
+    } catch (IOException e) {
+      System.err.println("Ha habido problemas al cargar el fichero.\n");
+    } catch (AddressBookXMLException e) {
+      System.err.println("Ha habido problemas con el formato del XML: " + e.getMessage() + "\n");
+    }
 
   }
-
 
   private static void mostrar() {
     System.out.println(agenda + "\n");    
@@ -176,7 +199,9 @@ public class Agenda {
 
   private static String pedirFichero(String mensaje) {
     Scanner s = new Scanner(System.in);
-    System.out.print(mensaje +": ");
-    return s.nextLine();
+    System.out.print("\n" + mensaje + ": ");
+    String fichero = s.nextLine();
+    System.out.println();
+    return fichero;
   }
 }
