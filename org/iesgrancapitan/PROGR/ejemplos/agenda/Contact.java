@@ -26,9 +26,9 @@ package org.iesgrancapitan.PROGR.ejemplos.agenda;
 import static org.iesgrancapitan.PROGR.ejemplos.agenda.Patterns.*;
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
 public class Contact implements Comparable<Contact>, Serializable {
 
+  private static final long serialVersionUID = 8356237024726774279L;
   private String name;
   private String surnames;
   private String address;
@@ -54,6 +54,19 @@ public class Contact implements Comparable<Contact>, Serializable {
     setAddress(address);
     setEmail(email);
     setPhone(phone);
+  }
+  
+  public static Contact of(String name, String surnames, String address, String email,
+                                   String phone) {
+    Contact contact;
+    contact = new Contact(name, surnames, address);
+    if (! email.isBlank()) {
+      contact.setEmail(email);
+    }
+    if (! phone.isBlank()) {
+      contact.setPhone(phone);
+    }
+    return contact;
   }
 
   public String getName() {
@@ -157,12 +170,10 @@ public class Contact implements Comparable<Contact>, Serializable {
 
   @Override
   public String toString() {
-    return "Contact [" + (name != null ? "name=" + name + ", " : "")
-        + (surnames != null ? "surnames=" + surnames + ", " : "")
-        + (address != null ? "address=" + address + ", " : "")
-        + (phone != null ? "phone=" + phone + ", " : "") + (email != null ? "email=" + email : "")
-        + "]";
+    return "Contact [name=" + name + ", surnames=" + surnames + ", address=" + address + ", phone="
+        + phone + ", email=" + email + "]";
   }
 
+  
   
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import org.iesgrancapitan.PROGR.ejemplos.agenda.AddressBook;
 import org.iesgrancapitan.PROGR.ejemplos.agenda.AddressBookCSVException;
+import org.iesgrancapitan.PROGR.ejemplos.agenda.AddressBookJSONException;
 import org.iesgrancapitan.PROGR.ejemplos.agenda.AddressBookXMLException;
 import org.iesgrancapitan.PROGR.ejemplos.agenda.Contact;
 import org.iesgrancapitan.PROGR.ejemplos.agenda.ContactErrorException;
@@ -25,6 +26,7 @@ public class Agenda {
         "Guardar agenda", "Recuperar agenda (perdiendo datos actuales)", 
         "Exportar CSV", "Recuperar CSV (perdiendo datos actuales)", 
         "Exportar XML", "Recuperar XML (perdiendo datos actuales)",
+        "Exportar JSON", "Recuperar JSON (perdiendo datos actuales)",
         "Salir");
     
     while (true) {
@@ -55,6 +57,12 @@ public class Agenda {
           break;
         case 9:
           recuperarXML();
+          break;
+        case 10:
+          exportarJSON();
+          break;
+        case 11:
+          recuperarJSON();
           break;
         default:
           System.out.println("\n¡Hasta la próxima!");
@@ -132,7 +140,7 @@ public class Agenda {
       agenda = AddressBook.load(fichero);
 
     } catch (ClassNotFoundException | IOException e) {
-      System.err.println("No se ha podido recuperar la agenda.\n");
+      System.err.println("No se ha podido recuperar la agenda: " + e.getMessage() + "\n");
     }
   }
 
@@ -189,6 +197,30 @@ public class Agenda {
       System.err.println("Ha habido problemas al cargar el fichero.\n");
     } catch (AddressBookXMLException e) {
       System.err.println("Ha habido problemas con el formato del XML: " + e.getMessage() + "\n");
+    }
+
+  }
+  
+  private static void exportarJSON() {
+    try {
+      String fichero = pedirFichero("Nombre del fichero donde exportar a JSON la agenda");
+      agenda.saveJSON(fichero);
+
+    } catch (IOException e) {
+      System.err.println("No se ha podido exportar a JSON: " + e.getMessage() + "\n");
+    }
+
+  }
+  
+  private static void recuperarJSON() {
+    try {
+      String fichero = pedirFichero("Nombre del fichero JSON");
+      agenda = AddressBook.loadJSON(fichero);
+
+    } catch (IOException e) {
+      System.err.println("Ha habido problemas al cargar el fichero.\n");
+    } catch (AddressBookJSONException e) {
+      System.err.println("Ha habido problemas con el formato del JSON: " + e.getMessage() + "\n");
     }
 
   }
