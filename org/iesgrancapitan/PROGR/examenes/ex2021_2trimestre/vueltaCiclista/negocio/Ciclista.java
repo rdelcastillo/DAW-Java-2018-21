@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio;
+package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.vueltaCiclista.negocio;
 
 import java.util.Arrays;
 

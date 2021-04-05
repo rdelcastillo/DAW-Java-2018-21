@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.presentacion;
+package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.presentacion;
 
 /**
  * Examen 2º trimestre del curso 2020/21.
@@ -35,15 +35,15 @@ package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.presentacion;
 
 import java.io.IOException;
 import java.util.Scanner;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.Calificaciones;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.Estudiante;
-import org.iesgrancapitan.PROGR.ejemplos.agenda.AddressBookXMLException;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.CSVEstudiantesException;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.negocio.CSVCalificacionesException;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.negocio.Calificaciones;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.negocio.Estudiante;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.negocio.XMLCalificacionesException;
 import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.utiles.Menu;
 
 public class Calificaciones2021 {
 
-  private static Calificaciones estudiantes = new Calificaciones();
+  private static Calificaciones calificaciones = new Calificaciones();
 
   public static void main(String[] args) {
     Menu menu = new Menu("CALIFICACIONES", 
@@ -61,17 +61,17 @@ public class Calificaciones2021 {
       int opcion = menu.elegir();
       switch (opcion) {
         case 1: 
-          cargaNotasCSV(); break;
+          cargaCalificacionesCSV(); break;
         case 2: case 3: case 4: case 5: case 6: case 7: case 8:
-          if (! estudiantes.isEmpty()) {
+          if (! calificaciones.isEmpty()) {
             switch (opcion) {
               case 2: muestraNumeroEstudiantesEntregaTodoConNotaMayor5(); break;
               case 3: muestraNumeroEstudiantesPresentaEjercicio(); break;
               case 4: muestraNotaMediaEjercicio(); break;
               case 5: muestraNotaMasAltaEjercicio(); break;
-              case 6: muestraNotaMasAlta(); break;
+              case 6: muestraNotaMasAltaGlobal(); break;
               case 7: muestraNotas(); break;
-              case 8: guardaNotasXML(); break;
+              case 8: guardaCalificacionesXML(); break;
             }
           } else {
             System.out.println("Primero debe cargar los datos...\n");
@@ -85,39 +85,38 @@ public class Calificaciones2021 {
 
   }
 
-  private static void cargaNotasCSV() {
-    Calificaciones estudiantesCopia = estudiantes;
+  private static void cargaCalificacionesCSV() {
+    Calificaciones calificacionesCopia = calificaciones;
     String nombreFichero = pideNombreFichero();
 
     try {
-      estudiantes = new Calificaciones();
-      estudiantes.cargaCSV(nombreFichero);
+      calificaciones = new Calificaciones();
+      calificaciones.cargaCSV(nombreFichero);
 
-    } catch (IOException | CSVEstudiantesException e) {
-      estudiantes = estudiantesCopia;
+    } catch (IOException | CSVCalificacionesException e) {
+      calificaciones = calificacionesCopia;
       System.err.println("Error al abrir " + nombreFichero + ": " + e.getMessage() + "\n");
     }
 
   }
 
   private static void muestraNumeroEstudiantesEntregaTodoConNotaMayor5() {
-    int n = estudiantes.getNumeroEstudiantesNotaMayorIgual(5);   
+    int n = calificaciones.getNumeroEstudiantesNotaMayorIgual(5);   
     System.out.println("El número de estudiantes con todos los ejercicios entregados "
         + "y una media de 5 ó mas es de " + n + "\n");
   }
 
   private static void muestraNumeroEstudiantesPresentaEjercicio() {
     int ejercicio = pideEjercicio();
-    int entregas = estudiantes.getNumeroEntregasEjercicio(ejercicio);
+    int entregas = calificaciones.getNumeroEntregasEjercicio(ejercicio);
 
     System.out.println("El número de estudiantes que ha presentado el ejercicio "
         + ejercicio + " ha sido " + entregas + "\n");
   }
 
-
   private static void muestraNotaMediaEjercicio() {
     int ejercicio = pideEjercicio();
-    double media = estudiantes.getMediaEjercicio(ejercicio);
+    double media = calificaciones.getMediaEjercicio(ejercicio);
 
     System.out.println("La nota media de quienes han entregado el ejercio "
         + ejercicio + " es de " + media + "\n");
@@ -125,12 +124,12 @@ public class Calificaciones2021 {
 
   private static void muestraNotaMasAltaEjercicio() {
     int ejercicio = pideEjercicio();
-    double notaMasAlta = estudiantes.getNotaMaximaEjercicio(ejercicio);
+    double notaMasAlta = calificaciones.getNotaMaximaEjercicio(ejercicio);
 
     System.out.println("La nota más alta del ejercicio " + ejercicio + " ha sido " + notaMasAlta
                      + " y la ha obtenido:");
-    for (int i = 1; i <= estudiantes.size(); i++) {
-      Estudiante e = estudiantes.getEstudiante(i);
+    for (int i = 1; i <= calificaciones.size(); i++) {
+      Estudiante e = calificaciones.getEstudiante(i);
       if (e.getNota(ejercicio) == notaMasAlta) {
         System.out.println(e.getNombre());
       }
@@ -138,13 +137,13 @@ public class Calificaciones2021 {
     System.out.println();
   }
 
-  private static void muestraNotaMasAlta() {
-    double notaMasAlta = estudiantes.getNotaMaxima();
+  private static void muestraNotaMasAltaGlobal() {
+    double notaMasAlta = calificaciones.getNotaMaximaGlobal();
     
     System.out.println("La nota más alta del ha sido " + notaMasAlta
                      + " y la ha obtenido:");
-    for (int i = 1; i <= estudiantes.size(); i++) {
-      Estudiante e = estudiantes.getEstudiante(i);
+    for (int i = 1; i <= calificaciones.size(); i++) {
+      Estudiante e = calificaciones.getEstudiante(i);
       if (e.getMedia() == notaMasAlta) {
         System.out.println(e.getNombre());
       }
@@ -167,19 +166,18 @@ public class Calificaciones2021 {
     return ejercicio;
   }
 
- 
   private static void muestraNotas() {
-    System.out.println(estudiantes);
+    System.out.println(calificaciones);
     System.out.println();
   }
 
-  private static void guardaNotasXML() {
+  private static void guardaCalificacionesXML() {
     String nombreFichero = pideNombreFichero();
     try {
-      estudiantes.guardaXML(nombreFichero);
+      calificaciones.guardaXML(nombreFichero);
     } catch (IOException e) {
       System.err.println("Error al guardar " + nombreFichero + ": " + e.getMessage() + "\n");
-    } catch (AddressBookXMLException e) {
+    } catch (XMLCalificacionesException e) {
       System.err.println("Error al generar XML: " + e.getMessage() + "\n");
     }
 

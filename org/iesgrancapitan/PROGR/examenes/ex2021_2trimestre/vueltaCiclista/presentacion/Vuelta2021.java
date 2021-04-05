@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.presentacion;
+package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.vueltaCiclista.presentacion;
 
 /**
  * Tenemos guardados en un fichero CSV los nombres, dorsales y tiempos (en segundos) 
@@ -31,13 +31,13 @@ package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.presentacion;
 
 import java.io.IOException;
 import java.util.Scanner;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.CSVEtapasCiclistasException;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.Ciclista;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.CiclistasVuelta;
 import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.utiles.Menu;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.vueltaCiclista.negocio.CiclistasVueltaCSVException;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.vueltaCiclista.negocio.Ciclista;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.vueltaCiclista.negocio.CiclistasVuelta;
 
 public class Vuelta2021 {
-  
+
   private static CiclistasVuelta ciclistas = new CiclistasVuelta();
 
   public static void main(String[] args) {
@@ -69,8 +69,8 @@ public class Vuelta2021 {
           System.exit(0);
       }
     }
-
   }
+  
   private static void cargaCiclistasCSV() {
     CiclistasVuelta ciclistasCopia = ciclistas;
     String nombreFichero = pideNombreFichero();
@@ -78,8 +78,8 @@ public class Vuelta2021 {
     try {
       ciclistas = new CiclistasVuelta();
       ciclistas.cargaCSV(nombreFichero);
-      
-    } catch (IOException | CSVEtapasCiclistasException e) {
+
+    } catch (IOException | CiclistasVueltaCSVException e) {
       ciclistas = ciclistasCopia;
       System.err.println("Error al abrir " + nombreFichero + ": " + e.getMessage() + "\n");
     }
@@ -96,11 +96,11 @@ public class Vuelta2021 {
   private static void muestraGanadorVuelta() {
     muestraDatosGanadorVuelta(ciclistas.ganadorVuelta());
   }
-  
+
   private static void muestraDatosGanadorVuelta(Ciclista ganador) {
     System.out.println("Ganador de la vuelta: dorsal " + ganador.getDorsal() 
-    + " - " + ganador.getNombre() + " con tiempo " 
-    + CiclistasVuelta.tiempoFormateado(ganador.getTiempoTotal()));
+              + " - " + ganador.getNombre() + " con tiempo " 
+              + CiclistasVuelta.tiempoFormateado(ganador.getTiempoTotal()));
     System.out.println();
   }
 
@@ -112,11 +112,11 @@ public class Vuelta2021 {
 
   private static void muestraDatosGanadorEtapa(int etapa, Ciclista ganador) {
     System.out.println("Ganador de la etapa: " + etapa + " dorsal " + ganador.getDorsal() 
-                     + " - " + ganador.getNombre() + " con tiempo " 
-                     + CiclistasVuelta.tiempoFormateado(ganador.getTiempoEtapa(etapa)));
+              + " - " + ganador.getNombre() + " con tiempo " 
+              + CiclistasVuelta.tiempoFormateado(ganador.getTiempoEtapa(etapa)));
     System.out.println();
   }
-  
+
   private static int pideEtapa() {
     Scanner s = new Scanner(System.in);
     int etapa;
