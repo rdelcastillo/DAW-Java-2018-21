@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.presentacion;
+package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.presentacion;
 
 /**
  * Examen 2º trimestre del curso 2020/21.
@@ -35,10 +35,10 @@ package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.presentacion;
 
 import java.io.IOException;
 import java.util.Scanner;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.Calificaciones;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.Estudiante;
-import org.iesgrancapitan.PROGR.ejemplos.agenda.AddressBookXMLException;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.CSVEstudiantesException;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.negocio.CSVEstudiantesException;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.negocio.Calificaciones;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.negocio.Estudiante;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.negocio.XMLEstudiantesException;
 import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.utiles.Menu;
 
 public class Calificaciones2021 {
@@ -114,7 +114,6 @@ public class Calificaciones2021 {
         + ejercicio + " ha sido " + entregas + "\n");
   }
 
-
   private static void muestraNotaMediaEjercicio() {
     int ejercicio = pideEjercicio();
     double media = estudiantes.getMediaEjercicio(ejercicio);
@@ -167,7 +166,6 @@ public class Calificaciones2021 {
     return ejercicio;
   }
 
- 
   private static void muestraNotas() {
     System.out.println(estudiantes);
     System.out.println();
@@ -179,7 +177,7 @@ public class Calificaciones2021 {
       estudiantes.guardaXML(nombreFichero);
     } catch (IOException e) {
       System.err.println("Error al guardar " + nombreFichero + ": " + e.getMessage() + "\n");
-    } catch (AddressBookXMLException e) {
+    } catch (XMLEstudiantesException e) {
       System.err.println("Error al generar XML: " + e.getMessage() + "\n");
     }
 

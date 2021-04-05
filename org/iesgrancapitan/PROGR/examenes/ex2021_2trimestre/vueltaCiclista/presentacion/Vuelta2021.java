@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.presentacion;
+package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.vueltaCiclista.presentacion;
 
 /**
  * Tenemos guardados en un fichero CSV los nombres, dorsales y tiempos (en segundos) 
@@ -31,10 +31,10 @@ package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.presentacion;
 
 import java.io.IOException;
 import java.util.Scanner;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.CSVEtapasCiclistasException;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.Ciclista;
-import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio.CiclistasVuelta;
 import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.utiles.Menu;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.vueltaCiclista.negocio.CSVEtapasCiclistasException;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.vueltaCiclista.negocio.Ciclista;
+import org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.vueltaCiclista.negocio.CiclistasVuelta;
 
 public class Vuelta2021 {
   

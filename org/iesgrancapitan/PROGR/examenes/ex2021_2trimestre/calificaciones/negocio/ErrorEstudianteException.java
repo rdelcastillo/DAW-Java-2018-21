@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio;
+package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.negocio;
 
 @SuppressWarnings("serial")
 public class ErrorEstudianteException extends IllegalArgumentException {

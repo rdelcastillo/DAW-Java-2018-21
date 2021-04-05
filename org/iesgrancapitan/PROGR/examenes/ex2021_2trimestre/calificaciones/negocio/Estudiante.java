@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.negocio;
+package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.negocio;
 
 /**
  * Clase Estudiante para el examen del 2º trimestre del curso 2020/21.
