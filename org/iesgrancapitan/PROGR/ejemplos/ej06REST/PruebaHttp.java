@@ -19,9 +19,13 @@ public class PruebaHttp {
   public static void main(String[] args) throws IOException, InterruptedException {
     
     HttpClient client = HttpClient.newHttpClient();
-    HttpRequest request = HttpRequest.newBuilder(URI.create("http://example.com")).build();
+    HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create("http://example.com"))
+        .GET()
+        .build();
     HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
     
+    System.out.println("Petición URL: " + response.uri());
     System.out.println("Status Code: " + response.statusCode());
     System.out.println("HTML devuelto:\n" + response.body());
   }
