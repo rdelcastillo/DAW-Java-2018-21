@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 public class AddressBookJSON {
 
   /**
-   * Crea un JSON de un addressBook y lo almacena en un fichero.
+   * Crea un JSON (serializa) de un addressBook y lo almacena en un fichero.
    */
   static void save(AddressBook addressBook, String fileName) throws IOException {
     Gson gson = new Gson();
@@ -27,7 +27,7 @@ public class AddressBookJSON {
   }
 
   /**
-   * Devuelve un addressBook de un JSON almacenado en un fichero.
+   * Devuelve un addressBook de un JSON almacenado en un fichero (deserialización).
    */
   public static AddressBook load(String fileName) throws IOException, AddressBookJSONException {
     try {

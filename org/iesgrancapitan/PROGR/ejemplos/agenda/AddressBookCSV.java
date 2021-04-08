@@ -3,7 +3,7 @@ package org.iesgrancapitan.PROGR.ejemplos.agenda;
 import java.io.IOException;
 
 /**
- * Clase común para valores y métodos estáticos de las clases que trabajan con CVS.
+ * Clase común para valores y métodos estáticos de las clases que trabajan con CSV.
  * 
  * @author Rafael del Castillo Gomariz
  *
