@@ -8,7 +8,7 @@ import org.iesgrancapitan.PROGR.ejemplos.agenda.AddressBookJSONException;
 import org.iesgrancapitan.PROGR.ejemplos.agenda.AddressBookXMLException;
 import org.iesgrancapitan.PROGR.ejemplos.agenda.Contact;
 import org.iesgrancapitan.PROGR.ejemplos.agenda.ContactErrorException;
-import org.iesgrancapitan.PROGR.ejercicios.ej04POO.Menu;
+import org.iesgrancapitan.PROGR.ejercicios.ej04poo.Menu;
 
 /**
  * Prueba de la clase AddressBook implementando una agenda.

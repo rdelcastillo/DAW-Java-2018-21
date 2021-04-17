@@ -18,7 +18,7 @@ public class Estudiante implements Comparable<Estudiante> {
 
   public Estudiante(String nombre) {
     this.nombre = nombre;
-    for (int i = 1; i < Calificaciones.NUM_NOTAS; i++) {
+    for (int i = 1; i <= Calificaciones.NUM_NOTAS; i++) {
       setNota(i, NO_REALIZADO);
     }
   }
