@@ -17,21 +17,35 @@ import com.google.gson.Gson;
  * Para invocarla se llama a un método estático (show) que será quien cree un objeto a 
  * través de su constructor privado.
  * 
- * Usamos tres mapas para almacenar las mediciones de las temperaturas anteriores,
- * donde la clave será la fecha de medición y el valor una lista con las temperaturas de 
- * ese día.
+ * Usamos un mapa con una clase envoltorio para almacenar las mediciones de las temperaturas 
+ * anteriores, donde la clave será la fecha de medición y el valor una lista con las temperaturas 
+ * de ese día.
  */
 
 public class Forecast {
   
-  class Temperatures {
-    List<Double> stdTemperatures = new ArrayList<>();
-    List<Double> maxTemperatures = new ArrayList<>();
-    List<Double> minTemperatures = new ArrayList<>();
+  /**
+   * Clase para almacenar la medición de una temperatura (normal, mínimo y máximo).
+   * No usamos getters ni setters porque la vamos a usar como una estructura de datos.
+   */
+  class Temperature {
+    double normal;
+    double max;
+    double min;
+    
+    public Temperature(double normal, double max, double min) {
+      this.normal = normal;
+      this.max = max;
+      this.min = min;
+    }
   }
   
-  private Map<String, Temperatures> temperaturesForDate = new TreeMap<>();
+  private Map<String, List<Temperature>> temperaturesForDate = new TreeMap<>();
   
+  /**
+   * Método estático al que se llama desde fuera de la clase para mostrar el pronóstico
+   * de temperaturas.
+   */
   public static void show(String json) {
     Forecast forecast = new Forecast(json);
     forecast.showDailyTemperatures();    
@@ -56,16 +70,15 @@ public class Forecast {
 
   private void addResult(Result result) {
     String date = result.getDtTxt().substring(0,10);
-    double temp = result.getMain().getTemp();
+    double tempNormal = result.getMain().getTemp();
     double tempMin = result.getMain().getTempMin();
     double tempMax = result.getMain().getTempMax();
+    Temperature temp = new Temperature(tempNormal, tempMax, tempMin);
     
     if (!temperaturesForDate.containsKey(date)) {
-      temperaturesForDate.put(date, new Temperatures());
+      temperaturesForDate.put(date, new ArrayList<Temperature>());
     }
-    temperaturesForDate.get(date).stdTemperatures.add(temp);
-    temperaturesForDate.get(date).minTemperatures.add(tempMin);
-    temperaturesForDate.get(date).maxTemperatures.add(tempMax);
+    temperaturesForDate.get(date).add(temp);
   }
 
   private void showDailyTemperatures() {
@@ -76,26 +89,31 @@ public class Forecast {
     }
   }
 
-  private void showDateTemperatures(Temperatures temperatures) {
-    double meanTemp = mean(temperatures.stdTemperatures);
-    double maxTemp = Collections.max(temperatures.maxTemperatures);
-    double minTemp = Collections.min(temperatures.minTemperatures);
-    int measurements = temperatures.stdTemperatures.size();
-
-    System.out.println("Temperatura media:  " + temperatureToString(meanTemp));
-    System.out.println("Temperatura mínima: " + minTemp + "º y máxima: " + maxTemp + "º");
-    System.out.println("Mediciones: " + measurements + "\n");
+  private void showDateTemperatures(List<Temperature> temperatures) {
+    System.out.println("Temperatura media:  " + temperatureToString(meanTemperature(temperatures)));
+    System.out.println("Temperatura mínima: " + temperatureToString(minTemperature(temperatures)));
+    System.out.println("Temperatura máxima: " + temperatureToString(maxTemperature(temperatures)));
+    System.out.println("Mediciones: " + temperatures.size() + "\n");
   }
 
-  /**
-   * Este método devuelve la media de la lista.
-   */
-  private static double mean(List<Double> measurements) {
+  private static double meanTemperature(List<Temperature> temperatures) {
     double sum = 0;
-    for (double measurement: measurements) {
-      sum += measurement;
+    for (Temperature temp: temperatures) {
+      sum += temp.normal;
     }
-    return sum / measurements.size();
+    return sum / temperatures.size();
+  }
+  
+  private static double maxTemperature(List<Temperature> temperatures) {
+    List<Double> maxTemperatures = new ArrayList<>();
+    temperatures.forEach(temp -> maxTemperatures.add(temp.max));
+    return Collections.max(maxTemperatures);
+  }
+  
+  private static double minTemperature(List<Temperature> temperatures) {
+    List<Double> minTemperatures = new ArrayList<>();
+    temperatures.forEach(temp -> minTemperatures.add(temp.min));
+    return Collections.min(minTemperatures);
   }
   
   /**
@@ -114,48 +132,25 @@ public class Forecast {
   }
 
   private void showGlobalTemperatures() {
+    List<Temperature> globalTemperatures = globalTemperatures();
+    double meanGlobalTemp = meanTemperature(globalTemperatures);
+    double maxGlobalTemp = maxTemperature(globalTemperatures);
+    double minGlobalTemp = minTemperature(globalTemperatures);
+    
     System.out.println("MEDICIONES GLOBALES");
     System.out.println("------------_------");
-    System.out.println("Temperatura media:  " + temperatureToString(meanGlobalTemp()));
-    System.out.println("Temperatura mínima: " + temperatureToString(minGlobalTemp()));
-    System.out.println("Temperatura máxima: " + temperatureToString(maxGlobalTemp()));
-    System.out.println("Mediciones totales: " + measurementsSize());
+    System.out.println("Temperatura media:  " + temperatureToString(meanGlobalTemp));
+    System.out.println("Temperatura mínima: " + temperatureToString(minGlobalTemp));
+    System.out.println("Temperatura máxima: " + temperatureToString(maxGlobalTemp));
+    System.out.println("Mediciones totales: " + globalTemperatures.size());
   }
 
-  private double meanGlobalTemp() {
-    List<Double> globalTemp = new ArrayList<>();
-    for (String key: temperaturesForDate.keySet()) {
-      globalTemp.addAll(temperaturesForDate.get(key).stdTemperatures);
+  private List<Temperature> globalTemperatures() {
+    List<Temperature> globalTemperatures = new ArrayList<>(); 
+    for (String date: temperaturesForDate.keySet()) {
+      globalTemperatures.addAll(temperaturesForDate.get(date));
     }
-    return mean(globalTemp);
-  }
-
-  private double minGlobalTemp() {
-    List<Double> globalMinTemp = new ArrayList<>();
-    for (String key: temperaturesForDate.keySet()) {
-      globalMinTemp.addAll(temperaturesForDate.get(key).minTemperatures);
-    }
-    return Collections.min(globalMinTemp);
-  }
-  
-  private double maxGlobalTemp() {
-    List<Double> globalMaxTemp = new ArrayList<>();
-    for (String key: temperaturesForDate.keySet()) {
-      globalMaxTemp.addAll(temperaturesForDate.get(key).minTemperatures);
-    }
-    return Collections.max(globalMaxTemp);
-  }
-
-  /**
-   * Este método devuelve el número de mediciones de temperaturas, que coincide
-   * con la suma del tamaño de todas las listas del mapa.
-   */
-  private int measurementsSize() {
-    int size = 0;
-    for (String key: temperaturesForDate.keySet()) {
-      size += temperaturesForDate.get(key).stdTemperatures.size();
-    }
-    return size;
+    return globalTemperatures;
   }
 
 }

@@ -186,7 +186,7 @@ public class TiempoEn5DiasRefactorizable {
     double minTemp =  minGlobalTemp(minTemperatures);
 
     System.out.println("MEDICIONES GLOBALES");
-    System.out.println("---------_---------");
+    System.out.println("-------------------");
     System.out.println("Temperatura media:  " + temperatureToString(meanTemp));
     System.out.println("Temperatura mínima: " + temperatureToString(minTemp));
     System.out.println("Temperatura máxima: " + temperatureToString(maxTemp));
@@ -194,17 +194,17 @@ public class TiempoEn5DiasRefactorizable {
   }
 
   private static double meanGlobalTemp(Map<String, List<Double>> temperatures) {
-    List<Double> globalList = temperaturesLists(temperatures);
+    List<Double> globalList = temperaturesList(temperatures);
     return mean(globalList);
   }
 
-  private static double maxGlobalTemp(Map<String, List<Double>> temperatures) {
-    List<Double> globalList = temperaturesLists(temperatures);
+  private static double maxGlobalTemp(Map<String, List<Double>> maxTemperatures) {
+    List<Double> globalList = temperaturesList(maxTemperatures);
     return Collections.max(globalList);
   }
 
-  private static double minGlobalTemp(Map<String, List<Double>> temperatures) {
-    List<Double> globalList = temperaturesLists(temperatures);
+  private static double minGlobalTemp(Map<String, List<Double>> minTemperatures) {
+    List<Double> globalList = temperaturesList(minTemperatures);
     return Collections.min(globalList);
   }
 
@@ -212,7 +212,7 @@ public class TiempoEn5DiasRefactorizable {
    * Este método extrae todas las listas de temperaturas del mapa pasado como parámetro
    * y las devuelve en una única lista global.
    */
-  private static List<Double> temperaturesLists(Map<String, List<Double>> temperatures) {
+  private static List<Double> temperaturesList(Map<String, List<Double>> temperatures) {
     List<Double> globalList = new ArrayList<>();
     for (String key: temperatures.keySet()) {
       globalList.addAll(temperatures.get(key));
