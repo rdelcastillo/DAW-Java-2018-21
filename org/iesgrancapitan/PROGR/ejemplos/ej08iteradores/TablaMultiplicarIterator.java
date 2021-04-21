@@ -11,13 +11,15 @@ import java.util.Iterator;
 
 public class TablaMultiplicarIterator implements Iterator<Integer> {
   
+  private static final int DEFAULT_SIZE = 10;
+  
   private int fila = 1;
   private int size;
   private int numero;
   
   public TablaMultiplicarIterator(int numero) {
     this.numero = numero;
-    this.size = 10;
+    this.size = DEFAULT_SIZE;
   }
   
   public TablaMultiplicarIterator(int numero, int size) {

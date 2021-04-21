@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 public class SerieFibonacciIterable implements Iterable<Long> {
   
-  int size;
+  private int size;
 
   public SerieFibonacciIterable(int size) {
     this.size = size;

@@ -11,6 +11,8 @@ import java.util.Iterator;
 
 public class TablaMultiplicarIterable implements Iterable<Integer> {
   
+  private static final int DEFAULT_SIZE = 10;
+  
   private int size;
   private int numero;
 
@@ -21,7 +23,7 @@ public class TablaMultiplicarIterable implements Iterable<Integer> {
 
   public TablaMultiplicarIterable(int numero) {
     this.numero = numero;
-    this.size = 10;
+    this.size = DEFAULT_SIZE;
   }
 
   @Override
