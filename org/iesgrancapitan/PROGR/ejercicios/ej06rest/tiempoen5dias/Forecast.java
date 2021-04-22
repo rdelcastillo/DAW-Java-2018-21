@@ -28,10 +28,10 @@ public class Forecast {
    * Clase para almacenar la medición de una temperatura (normal, mínimo y máximo).
    * No usamos getters ni setters porque la vamos a usar como una estructura de datos.
    */
-  class Temperature {
-    double normal;
-    double max;
-    double min;
+  private class Temperature {
+    private double normal;
+    private double max;
+    private double min;
     
     public Temperature(double normal, double max, double min) {
       this.normal = normal;
@@ -69,12 +69,12 @@ public class Forecast {
   }
 
   private void addResult(Result result) {
-    String date = result.getDtTxt().substring(0,10);
     double tempNormal = result.getMain().getTemp();
     double tempMin = result.getMain().getTempMin();
     double tempMax = result.getMain().getTempMax();
     Temperature temp = new Temperature(tempNormal, tempMax, tempMin);
     
+    String date = result.getDtTxt().substring(0,10);
     if (!temperaturesForDate.containsKey(date)) {
       temperaturesForDate.put(date, new ArrayList<Temperature>());
     }
