@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.ejemplos.ej09lambda;
+package org.iesgrancapitan.PROGR.ejemplos.ej08iteradoresylambda;
 
 import java.util.List;
 import java.util.function.Consumer;

@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.ejemplos.ej08iteradores;
+package org.iesgrancapitan.PROGR.ejemplos.ej08iteradoresylambda;
 
 public class TestTablaMultiplicarIterable {
 
