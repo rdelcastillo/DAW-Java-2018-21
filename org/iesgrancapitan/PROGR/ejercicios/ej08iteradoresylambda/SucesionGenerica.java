@@ -17,8 +17,8 @@ public class SucesionGenerica implements Iterable<Long> {
   Function<Integer, Long> lambda;
 
   public SucesionGenerica(int totalElementos, Function<Integer, Long> lambda) {
-    if (totalElementos < 2) {
-      throw new IllegalArgumentException(totalElementos + " es menor que 0.");
+    if (totalElementos < 1) {
+      throw new IllegalArgumentException(totalElementos + " es menor que 1.");
     }
     this.totalElementos = totalElementos;
     this.lambda = lambda;

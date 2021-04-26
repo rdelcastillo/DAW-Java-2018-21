@@ -34,8 +34,9 @@ public class CalculosListaEnterosAleatoriosConStream {
     
     // Creamos la lista de números usando IntStream (streams de números enteros). 
     // Más información: https://www.arquitecturajava.com/trabajando-con-java-8-intstream/
+    
     IntStream.range(1, TOTAL_ENTEROS)
-             .forEach(n -> lista.add(MINIMO + (int) (Math.random()*(MAXIMO-MINIMO)) + 1));
+        .forEach(n -> lista.add(MINIMO + (int) (Math.random()*(MAXIMO-MINIMO)) + 1));
     
     // Operaciones intermedias:
     // - stream() convierte la colección a un stream 
@@ -46,11 +47,28 @@ public class CalculosListaEnterosAleatoriosConStream {
     // - min().get() devuelve el mínimo del stream usando el Comparator de la expresión lambda
     // - count() devuelve el número de elementos del stream
     
-    int maximoPar = lista.stream().filter(n -> n%2 == 0).max((a,b) -> a-b).get();
-    int minimoMultiplo3 = lista.stream().filter(n -> n%3 == 0).min((a,b) -> a-b).get();
-    int totalNegativos = (int) lista.stream().filter(n -> n < 0).count();
-    int totalPrimos = (int) lista.stream().filter(n -> Matematicas.esPrimo(n)).count();
-    int maximoPrimo = lista.stream().filter(n -> Matematicas.esPrimo(n)).max(Comparator.naturalOrder()).get();
+    int maximoPar = lista.stream()
+        .filter(n -> n%2 == 0)
+        .max((a,b) -> a.compareTo(b))
+        .get();
+    
+    int minimoMultiplo3 = lista.stream()
+        .filter(n -> n%3 == 0)
+        .min((a,b) -> a-b)
+        .get();
+    
+    int totalNegativos = (int) lista.stream()
+        .filter(n -> n < 0)
+        .count();
+    
+    int totalPrimos = (int) lista.stream()
+        .filter(n -> Matematicas.esPrimo(n))
+        .count();
+    
+    int maximoPrimo = lista.stream()
+        .filter(n -> Matematicas.esPrimo(n))
+        .max(Comparator.naturalOrder())
+        .get();
     
     System.out.println("Máximo de los números pares.: " + maximoPar);
     System.out.println("Mínimo de los múltiplos de 3: " + minimoMultiplo3);
