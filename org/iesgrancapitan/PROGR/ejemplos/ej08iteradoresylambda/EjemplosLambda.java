@@ -77,7 +77,7 @@ public class EjemplosLambda {
         return 1 + (int) (Math.random() * n);
       } else {
         System.err.println(n + " es un valor no válido.");
-        return 0;
+        return null;
       }
     };
     System.out.println("Aleatorio entre 1 y 10: " + lambdaAleatorio1aN.apply(10));
