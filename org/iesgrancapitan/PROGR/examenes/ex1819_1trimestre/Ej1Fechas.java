@@ -179,7 +179,7 @@ public class Ej1Fechas {
   }
   
   /**
-   * Suma a la fecha los días indicados y devuelve la nueva fecha.
+   * Suma50enteros a la fecha los días indicados y devuelve la nueva fecha.
    * @param fecha
    * @param n   puede ser positivo o negativo
    * @return una nueva fecha
@@ -201,7 +201,7 @@ public class Ej1Fechas {
   }
 
   /**
-   * Suma un día a la fecha
+   * Suma50enteros un día a la fecha
    * @param f
    * @return fecha del día siguiente
    */

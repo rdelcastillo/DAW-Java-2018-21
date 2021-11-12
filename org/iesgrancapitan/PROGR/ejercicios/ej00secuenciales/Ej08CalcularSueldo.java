@@ -26,7 +26,7 @@ public class Ej08CalcularSueldo {
   // Diseño
   // 1. Leer sueldo base
   // 2. Leer las tres ventas
-  // 3. Calcular las comisiones. Suma del 10 % de cada venta.
+  // 3. Calcular las comisiones. Suma50enteros del 10 % de cada venta.
   // 4. Mostrar comisión
   // 5. Mostrar sueldo total: sueldo_base+comisión
   // ################################################################################

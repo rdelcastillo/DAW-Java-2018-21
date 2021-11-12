@@ -105,7 +105,7 @@ public class Tiempo {
   // Resto de métodos
   
   /**
-   * Suma a este objeto el que le pasamos como parámetro y lo devuelve
+   * Suma50enteros a este objeto el que le pasamos como parámetro y lo devuelve
    * @param otro
    * @return
    */
@@ -125,7 +125,7 @@ public class Tiempo {
   }
   
   /**
-   * Suma segundos a este objeto.
+   * Suma50enteros segundos a este objeto.
    * @param segundos
    */
   public void sumaSegundos(int segundos) {
@@ -142,7 +142,7 @@ public class Tiempo {
   }
   
   /**
-   * Suma minutos a este objeto.
+   * Suma50enteros minutos a este objeto.
    * @param minutos
    */
   public void sumaMinutos(int minutos) {
@@ -158,7 +158,7 @@ public class Tiempo {
   }
   
   /**
-   * Suma horas a este objeto.
+   * Suma50enteros horas a este objeto.
    * @param horas
    */
   public void sumaHoras(int horas) {

@@ -27,10 +27,11 @@ public class Ej03CalcularParImpar {
 
   public static void main(String args[]) {
     Scanner s = new Scanner(System.in);
-    int num;
+    
     System.out.print("Dime el número: ");
-    num = s.nextInt();
-    if (num%2==0) {
+    int num = s.nextInt();
+    
+    if (num%2 == 0) {
       System.out.println("Es Par");
     } else {
       System.out.println("Es impar");

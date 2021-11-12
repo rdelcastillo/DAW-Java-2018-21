@@ -29,14 +29,13 @@ public class Ej06EsMayusculas {
 
   public static void main(String args[]) {
     Scanner s = new Scanner(System.in);
-    String cad;
 
     // Pedir datos
     System.out.print("Introduce una cadena: ");
-    cad = s.nextLine();
+    String ch = s.nextLine();
 
-    // Comprobamos ymostramos resultados
-    if (cad.length()==1 && (cad.compareTo("A")>=0 && cad.compareTo("Z")<=0)) {
+    // Comprobamos y mostramos resultados
+    if (ch.length()==1 && (ch.compareTo("A")>=0 && ch.compareTo("Z")<=0)) {
       System.out.println("La cadena es una letra mayúscula");
     } else {
       System.out.println("La cadena no es una letra mayúscula");

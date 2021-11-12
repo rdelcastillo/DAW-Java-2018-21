@@ -28,13 +28,21 @@ public class Ej01CalcularMayor {
 
   public static void main(String args[]) {
     Scanner s = new Scanner(System.in);
+    
     int num1;
     int num2;
+    
+    // Entrada de datos
+    
     System.out.println("Dime el número 1:");
     num1 = s.nextInt();
+    
     System.out.println("Dime el número 2:");
     num2 = s.nextInt();
-    if (num1>num2) {
+    
+    // Salida
+    
+    if (num1 > num2) {
       System.out.println("Número 1 es mayor que número 2");
     } else {
       System.out.println("Número 1 NO es mayor que número 2");

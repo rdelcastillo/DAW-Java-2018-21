@@ -66,7 +66,7 @@ public class Fecha {
   }
   
   /**
-   * Suma un día a la fecha que se pasa como parámetro y la devuelve.
+   * Suma50enteros un día a la fecha que se pasa como parámetro y la devuelve.
    * 
    * @param fecha
    * @return nuevo fecha
@@ -93,7 +93,7 @@ public class Fecha {
   }
   
   /**
-   * Suma una serie de días a la fecha que se pasa como parámetro y la devuelve.
+   * Suma50enteros una serie de días a la fecha que se pasa como parámetro y la devuelve.
    * 
    * @param fecha
    * @param dias

@@ -153,7 +153,7 @@ public class Fecha implements Comparable<Fecha>, Cloneable {
   }
 
   /**
-   * Suma un día a la fecha almacenada.
+   * Suma50enteros un día a la fecha almacenada.
    * 
    */
   private void sumar1Dia() {
@@ -177,7 +177,7 @@ public class Fecha implements Comparable<Fecha>, Cloneable {
   }
 
   /**
-   * Suma una serie de días a la fecha almacenada.
+   * Suma50enteros una serie de días a la fecha almacenada.
    * 
    * @param dias
    */
