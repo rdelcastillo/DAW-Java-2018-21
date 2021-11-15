@@ -13,7 +13,7 @@ public class SentenciaSwitchClasica {
   public static void main(String[] args) { 
     Scanner s = new Scanner(System.in);
        
-    System.out.print("Por favor, introduzca un número de días de la semana: ");
+    System.out.print("Por favor, introduzca un número de día de la semana: ");
     int dia = s.nextInt();
     
     String nombreDelDia;
