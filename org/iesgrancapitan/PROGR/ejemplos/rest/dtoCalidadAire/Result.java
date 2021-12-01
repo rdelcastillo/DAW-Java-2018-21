@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.ejemplos.ej06rest.dtoCalidadAire;
+package org.iesgrancapitan.PROGR.ejemplos.rest.dtoCalidadAire;
 
 import java.util.List;
 import javax.annotation.processing.Generated;

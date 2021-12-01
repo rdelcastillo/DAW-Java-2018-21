@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.ejemplos.ej06rest;
+package org.iesgrancapitan.PROGR.ejemplos.rest;
 
 import java.io.IOException;
 import java.net.URI;

@@ -1,4 +1,4 @@
-package org.iesgrancapitan.PROGR.ejemplos.ej06rest;
+package org.iesgrancapitan.PROGR.ejemplos.rest;
 
 import java.io.IOException;
 import java.net.URI;
@@ -7,9 +7,9 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.List;
-import org.iesgrancapitan.PROGR.ejemplos.ej06rest.dtoCalidadAire.DTO;
-import org.iesgrancapitan.PROGR.ejemplos.ej06rest.dtoCalidadAire.Measurement;
-import org.iesgrancapitan.PROGR.ejemplos.ej06rest.dtoCalidadAire.Result;
+import org.iesgrancapitan.PROGR.ejemplos.rest.dtoCalidadAire.DTO;
+import org.iesgrancapitan.PROGR.ejemplos.rest.dtoCalidadAire.Measurement;
+import org.iesgrancapitan.PROGR.ejemplos.rest.dtoCalidadAire.Result;
 import com.google.gson.Gson;
 
 /**
