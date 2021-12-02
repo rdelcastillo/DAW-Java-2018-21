@@ -29,8 +29,7 @@ public class DescomposicionFactorialConFunciones {
     int prime = 2;
     do {
       System.out.printf("%3d | ", number);
-      // buscamos un factor primo
-      while (number % prime != 0) {
+      while (number % prime != 0) { // buscamos un factor primo
         prime = nextPrime(prime);
       }
       System.out.printf("%3d\n", prime);
@@ -43,7 +42,7 @@ public class DescomposicionFactorialConFunciones {
   private static int nextPrime(int prime) {
     int candidate = prime + 1;
     while (!isPrime(candidate)) {
-      candidate = prime + 1;
+      candidate++;
     } 
     return candidate;
   }

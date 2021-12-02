@@ -10,28 +10,35 @@ import java.util.Scanner;
  *
  */
 
-public class CalcularCombinatorioConFunciones {
+public class CalcularCombinatorioConFuncionesV2 {
 
-  public static void main(String[] args) {    
-    Scanner s = new Scanner(System.in);
+  public static void main(String[] args) {        
+    printPresentation();
     
-    // Presentación
+    int n = readInt("Dame el valor de n: ");
+    int m = readInt("Dame el valor de m: ");
+    exitIfWrong(n, m);
+    
+    long combinatorial = factorial(n) / (factorial(m) * factorial(n-m));
+    System.out.printf("El número combinatorio de %d sobre %d es %d\n", n, m, combinatorial);
+  }
+
+  public static void printPresentation() {
     System.out.println("Cálculo del combinatorio de dos números");
     System.out.println("---------------------------------------");
-    
-    // Pedimos datos
+  }
+
+  public static int readInt(String string) {
+    Scanner s = new Scanner(System.in);
     System.out.print("Dame el valor de n: ");
-    int n = s.nextInt();
-    System.out.print("Dame el valor de m: ");
-    int m = s.nextInt();
+    return s.nextInt();
+  }
+
+  public static void exitIfWrong(int n, int m) {
     if (m >= n || n < 1 || m < 1) {   // datos erróneos
       System.err.println("Datos de entrada erróneos.");
       System.exit(1);
     }
-
-    // Resultado
-    long combinatorial = factorial(n) / (factorial(m) * factorial(n-m));
-    System.out.printf("El número combinatorio de %d sobre %d es %d\n", n, m, combinatorial);
   }
 
   /**
