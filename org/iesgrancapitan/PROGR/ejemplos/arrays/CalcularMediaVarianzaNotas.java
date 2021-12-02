@@ -20,23 +20,23 @@ public class CalcularMediaVarianzaNotas {
     System.out.println("Cálculo de la media y varianza de una serie de notas");
     System.out.println("----------------------------------------------------");
     
-    double[] note = new double[NUM_NOTES];
+    double[] notes = new double[NUM_NOTES];
     
     // Petición de las notas y cálculo de la media
     double sumNotes = 0;
-    for (int i = 0; i < note.length; i++ ) {
+    for (int i = 0; i < notes.length; i++ ) {
       System.out.print("Introduce la nota número " + (i+1) + ": ");
-      note[i] = s.nextDouble();
-      sumNotes += note[i];
+      notes[i] = s.nextDouble();
+      sumNotes += notes[i];
     }
-    double meanNotes = sumNotes / note.length;
+    double meanNotes = sumNotes / notes.length;
     
     // Cálculo de la varianza
     double sum = 0;
-    for (int i = 0; i < note.length; i++) {
-      sum += Math.pow(note[i] - meanNotes, 2);
+    for (int i = 0; i < notes.length; i++) {
+      sum += Math.pow(notes[i] - meanNotes, 2);
     }
-    double variance = sum / note.length;
+    double variance = sum / notes.length;
 
     // Mostrar resultados
     System.out.println("La media de las notas es: " + meanNotes);
