@@ -14,7 +14,6 @@ public class OperacionesConCadenas {
     String string2 = "Soy otra cadena de caracteres";
     
     // Recorrer una cadena
-    
     System.out.println("Recorro " + string1 + " a través de su índice");
     for (int i=0; i < string1.length(); i++) {
       System.out.println("Carácter " + i + "(usando charAt()): " + string1.charAt(i));
@@ -26,6 +25,14 @@ public class OperacionesConCadenas {
     for (char ch: string1.toCharArray()) {
       System.out.println(ch);
     }
+    System.out.println("---");
+    
+    // Comparar cadenas
+    System.out.println("¿Es \"" + string1 + "\" igual a \"" + string2 + "\" " + string1.equals(string2));
+    System.out.println("¿Es \"" + string1 + "\" menor que \"" + string2 + "\" " + (string1.compareTo(string2)<0));
+    System.out.println("---");
+
+    
 
   }
 
