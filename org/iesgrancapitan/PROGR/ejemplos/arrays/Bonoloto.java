@@ -15,7 +15,7 @@ package org.iesgrancapitan.PROGR.ejemplos.arrays;
 
 public class Bonoloto {
 
-  private static final int TOTAL_NUMBERS_TO_GENERATE = 5000;
+  private static final int TOTAL_NUMBERS_TO_GENERATE = 50000;
   private static final int TOTAL_NUMBERS_BONOLOTO = 8;
   private static final int MAX_NUMBER = 49;
 
@@ -39,8 +39,8 @@ public class Bonoloto {
         }
       }
       System.out.print(numberMostFrequently + " ");
-      // para que en la siguiente iteración no se repita ese número lo cambiamos
-      numberFrecuencies[numberMostFrequently-1] = Integer.MIN_VALUE;
+      // para que en la siguiente iteración no se repita ese número cambiamos su frecuencia a -1
+      numberFrecuencies[numberMostFrequently-1] = -1;
     }
   }
 }

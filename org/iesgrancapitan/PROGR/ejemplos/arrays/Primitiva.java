@@ -9,7 +9,7 @@ package org.iesgrancapitan.PROGR.ejemplos.arrays;
  * TOTAL_NUMEROS_A_GENERAR <-- 8
  * numerosGenerados <-- 0
  * números <- {0,0,0,0,0,0,0,0}
- * MIENTRAS numerosGenerados <= TOTAL_NUMEROS_A_GENERAR
+ * MIENTRAS numerosGenerados < TOTAL_NUMEROS_A_GENERAR
  *     candidato <-- ALEATORIO(1,49)
  *     seHaGenerado <-- FALSO
  *     PARA i <-- 0 HASTA numerosGenerados-1
