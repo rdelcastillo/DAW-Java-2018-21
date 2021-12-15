@@ -24,7 +24,7 @@ public class Bonoloto {
     
     // generamos los números aleatorios y calculamos su frecuencia
     for (int i=0; i<TOTAL_NUMBERS_TO_GENERATE; i++) {
-      int number = (int) (1 + Math.random()*MAX_NUMBER);
+      int number = 1 + (int) (Math.random()*MAX_NUMBER);
       ++numberFrecuencies[number-1];
     }
     

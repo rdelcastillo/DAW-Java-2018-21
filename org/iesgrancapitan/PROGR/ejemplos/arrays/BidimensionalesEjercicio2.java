@@ -48,14 +48,20 @@ public class BidimensionalesEjercicio2 {
       for (int col = 0; col < COLUMNS; col++) {
         System.out.printf("%5d\t", table[row][col]);
       }
-      System.out.printf("%5d\n", rowsSum[row]);
+      System.out.printf("| %5d\n", rowsSum[row]);
     }
     
     // sumatorio columnas y total
+    String line = "-".repeat(5);
+    for (int col = 0; col < COLUMNS; col++) {
+      System.out.print(line + "\t");
+    }
+    System.out.println("| " + line);
+    
     for (int col = 0; col < COLUMNS; col++) {
       System.out.printf("%5d\t", columnsSum[col]);
     }
-    System.out.printf("%5d\n", total);
+    System.out.printf("| %5d\n", total);
     
 
   }
