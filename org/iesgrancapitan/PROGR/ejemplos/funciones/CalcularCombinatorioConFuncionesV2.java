@@ -28,14 +28,14 @@ public class CalcularCombinatorioConFuncionesV2 {
     System.out.println("---------------------------------------");
   }
 
-  public static int readInt(String string) {
+  public static int readInt(String prompt) {
     Scanner s = new Scanner(System.in);
-    System.out.print("Dame el valor de n: ");
+    System.out.print(prompt);
     return s.nextInt();
   }
 
-  public static void exitIfWrong(int n, int m) {
-    if (m >= n || n < 1 || m < 1) {   // datos erróneos
+  public static void exitIfWrong(int n1, int n2) {
+    if (n2 >= n1 || n1 < 1 || n2 < 1) {   // datos erróneos
       System.err.println("Datos de entrada erróneos.");
       System.exit(1);
     }
