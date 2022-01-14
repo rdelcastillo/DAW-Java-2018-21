@@ -1,7 +1,7 @@
 package org.iesgrancapitan.PROGR.examenes.ex2021_2trimestre.calificaciones.negocio;
 
 /**
- * Clase Calificaciones para el examen del 2º trimestre del curso 2020/21.
+ * Clase CalificacionesPlantilla para el examen del 2º trimestre del curso 2020/21.
  * 
  * Ver Calificaciones2021.java
  * 

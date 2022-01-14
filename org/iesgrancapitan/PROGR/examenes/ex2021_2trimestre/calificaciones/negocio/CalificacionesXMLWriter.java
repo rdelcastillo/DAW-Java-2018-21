@@ -48,7 +48,7 @@ public class CalificacionesXMLWriter {
   }
 
   private void guardaRaiz() {
-    Element raiz = xml.createElement("Calificaciones");
+    Element raiz = xml.createElement("CalificacionesPlantilla");
     xml.appendChild(raiz);
   }
 
