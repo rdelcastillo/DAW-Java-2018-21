@@ -21,7 +21,8 @@ public class PruebaFuncionesEjercicios1a14 {
     pruebaQuitaPorDetras(new int[] {158,1}, new int[] {-25687,2}, new int[] {389887,4});
     pruebaQuitaPorDelante(new int[] {158,1}, new int[] {-25687,2}, new int[] {389887,4});
     pruebaVoltea(2, 23, 327, 2098, -234);
-    pruebaTrozoDeNumero(new int[] {158,0,2}, new int[] {5878,1,3}, new int[] {9958,2,4});
+    pruebaTrozoDeNumero(new int[] {158,0,2}, new int[] {5878,1,3}, new int[] {9958,2,4}, 
+        new int[] {9944658,3,6}, new int[] {99333358,2,7});
     pruebaPegaPorDetras(new int[] {158,0}, new int[] {18,4}, new int[] {0,9});
     pruebaPegaPorDelante(new int[] {158,0}, new int[] {18,4}, new int[] {0,9});
     pruebaDigitoN(new int[] {158,0}, new int[] {798,1}, new int[] {986,2});
