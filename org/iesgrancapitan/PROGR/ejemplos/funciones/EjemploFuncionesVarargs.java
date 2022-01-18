@@ -19,6 +19,7 @@ public class EjemploFuncionesVarargs {
     imprime(Math.random(),Math.random(),Math.random(),Math.random(),Math.random());
   }
   
+  
   public static String lista(String nombre, int ... v) {
     String ristra = "[ " + nombre + ": ";
     for (int n: v) {
@@ -50,12 +51,21 @@ public class EjemploFuncionesVarargs {
     System.out.println("Imprimo un entero: 10");
   }
   
+  
   public static void imprime(int n) {
     System.out.println("Imprimo un entero: " + n);
   }
   
+  public static void imprime(int ... v) {
+    System.out.print("Imprimo una lista de enteros: ");
+    for (int n: v) {
+      System.out.print(n + " ");
+    }
+    System.out.println();
+  }
+  
   public static void imprime(double ... v) {
-    System.out.print("Imprimo flotantes: ");
+    System.out.print("Imprimo una lista de flotantes: ");
     for (double x: v) {
       System.out.print(x + " ");
     }
@@ -66,11 +76,4 @@ public class EjemploFuncionesVarargs {
     System.out.println("Imprimo una cadena: " + cadena);
   }
   
-  public static void imprime(int ... v) {
-    System.out.print("Imprimo una lista de enteros: ");
-    for (int n: v) {
-      System.out.print(n + " ");
-    }
-    System.out.println();
-  }
 }
