@@ -1,7 +1,5 @@
 package org.iesgrancapitan.PROGR.ejercicios.ej03funciones.arrays;
 
-import java.util.Arrays;
-
 /**
  * Crea una biblioteca de funciones para arrays (de una dimensión) de números
  * enteros que contenga las siguientes funciones:
@@ -120,7 +118,7 @@ public class FuncionesEj20a28 {
       numeros[i - (numeros.length-rotacionesReales)] = copiaNumeros[i];
     }
   }
-*/
+  */
   
   public static void rotaDerechaArrayInt(int[] numeros, int rotaciones) {
     for (int i = 1; i <= rotaciones; i++) {
@@ -129,15 +127,16 @@ public class FuncionesEj20a28 {
   }
   
   
-  public static void rotaUnoDerechaArrayInt(int[] numeros) {
-    int ultimo = numeros[numeros.length-1];
+  private static void rotaUnoDerechaArrayInt(int[] numeros) {
+    int ultimoNumero = numeros[numeros.length-1];
     for (int i = numeros.length-1; i > 0; i--) {
       numeros[i] = numeros[i - 1];
     }
-    numeros[0] = ultimo;
+    numeros[0] = ultimoNumero;
     
   }
 
+  /*
   public static void rotaIzquierdaArrayInt(int[] numeros, int rotaciones) {
     int rotacionesReales = rotaciones % numeros.length; // por si rotaciones > numeros.length
     int[] copiaNumeros = Arrays.copyOf(numeros, numeros.length);
@@ -145,5 +144,19 @@ public class FuncionesEj20a28 {
       numeros[(numeros.length-rotacionesReales+i) % numeros.length] = copiaNumeros[i];
     }
   }
+  */
+  
+  public static void rotaIzquierdaArrayInt(int[] numeros, int rotaciones) {
+    for (int i = 1; i <= rotaciones; i++) {
+      rotaUnoIzquierdaArrayInt(numeros);
+    }
+  }
 
+  private static void rotaUnoIzquierdaArrayInt(int[] numeros) {
+    int primerNumero = numeros[0];
+    for (int i = 0; i < numeros.length - 1; i++) {
+      numeros[i] = numeros[i + 1];
+    }
+    numeros[numeros.length - 1] = primerNumero;
+  }
 }
