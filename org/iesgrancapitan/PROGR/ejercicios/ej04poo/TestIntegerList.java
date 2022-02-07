@@ -41,15 +41,15 @@ class TestIntegerList {
   @Order(3)
   void testInsertInt() {
     // Lista vacía
-    assertTrue(listaVacia.insert(99));
+    assertTrue(listaVacia.add(99));
     assertEquals("[99]", listaVacia.toString());
     
     // Lista a la mitad
-    assertTrue(lista1a5.insert(99));
+    assertTrue(lista1a5.add(99));
     assertEquals("[1, 2, 3, 4, 5, 99]", lista1a5.toString());
     
     // Lista llena
-    assertFalse(lista1a10.insert(99));
+    assertFalse(lista1a10.add(99));
     assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]", lista1a10.toString());
   }
 
@@ -57,25 +57,25 @@ class TestIntegerList {
   @Order(4)
   void testInsertIntInt() {
     // pruebo añadir en el interior de la lista
-    assertTrue(lista1a5.insert(9, 2));
+    assertTrue(lista1a5.add(9, 2));
     assertEquals("[1, 2, 9, 3, 4, 5]", lista1a5.toString());
     
     // pruebo añadir en el exterior de la lista, debe saltar una excepción
     Exception exception = assertThrows(
         IndexOutOfBoundsException.class, 
-        () -> lista1a5.insert(99, 100));
+        () -> lista1a5.add(99, 100));
     assertEquals("Posición fuera de los límites de la lista.", exception.getMessage());
     
     // pruebo añadir en la posición 0 de la lista
-    assertTrue(lista1a5.insert(999, 0));
+    assertTrue(lista1a5.add(999, 0));
     assertEquals("[999, 1, 2, 9, 3, 4, 5]", lista1a5.toString());
     
     // pruebo añadir en la última posición de la lista
-    assertTrue(lista1a5.insert(9999, 7));
+    assertTrue(lista1a5.add(9999, 7));
     assertEquals("[999, 1, 2, 9, 3, 4, 5, 9999]", lista1a5.toString());
     
     // pruebo a insertar en una lista llena
-    assertFalse(lista1a10.insert(99999, 7));
+    assertFalse(lista1a10.add(99999, 7));
     assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]", lista1a10.toString());
   }
 

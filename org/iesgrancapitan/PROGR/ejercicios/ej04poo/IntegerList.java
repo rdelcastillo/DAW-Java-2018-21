@@ -17,6 +17,7 @@ import java.util.Arrays;
  *  
  * - IntegerList(ele1, ..., eleN): crea una lista con los elementos ele1 ... eleN.
  * 
+ * 
  * - pop(): me devuelve el último elemento de la lista y lo saca de la lista.
  * 
  * - pop(posición): me devuelve el elemento que está en "posición" y lo saca de la lista.- 
@@ -24,7 +25,7 @@ import java.util.Arrays;
  * - remove(elemento): borra la primera ocurrencia de "elemento" en la lista. Devolverá true o false
  *  en función del éxito de la operación.
  * 
- * - insert(elemento): añadir "elemento" al final de la lista. 
+ * - add(elemento): añadir "elemento" al final de la lista. 
  *  Devolveremos true o false en función del éxito de la operación.
  * 
  * - insert(elemento, posición): añadir "elemento" en la posición "posición" de la lista.
@@ -84,7 +85,7 @@ public class IntegerList {
    * @param element
    * @return éxito de la operación
    */
-  public boolean insert(int element) {
+  public boolean add(int element) {
     if (this.isFull()) {    // si lista llena acabamos
       return false;
     }
@@ -100,9 +101,9 @@ public class IntegerList {
    * @param pos
    * @return éxito de la operación
    */
-  public boolean insert(int element, int pos) {
+  public boolean add(int element, int pos) {
     if (pos == this.contentSize) {  // inserción al final (normal)
-      return this.insert(element); 
+      return this.add(element); 
     }
     
     if (this.isErrorPosition(pos)) {
